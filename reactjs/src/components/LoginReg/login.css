@@ -2,3 +2,31 @@
   padding: 3rem;
   border: 1px solid red
 }
+
+.login h2 {
+  font-size: 3rem;
+  padding-bottom: 0;
+  margin-bottom: 0.5rem;
+}
+
+.login-inputs {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.login-inputs input {
+  margin-bottom: 0.5rem;
+}
+
+.login-inputs input:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.login-inputs input::placeholder {
+  padding: 0.5rem;
+}
+
+.login-btn {
+  padding: 0.5rem 2rem;
+}
