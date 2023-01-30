@@ -28,7 +28,7 @@ app.set("socketio", io);
 mongoose
 	.connect(process.env.MONGO_KEY)
 	.then(() => {
-		console.log("All good, connection good");
+		console.log("All good, connection good", port);
 	})
 	.catch((e) => {
 		console.log("Error:", e);
