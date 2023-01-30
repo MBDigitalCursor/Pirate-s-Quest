@@ -1,11 +1,21 @@
-import '../src/css/App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import axios from "axios";
+import "../src/css/App.css";
 
 function App() {
-  const dispatch = useDispatch();
+	const obj = {
+		a: 5,
+		b: 8,
+	};
 
-  return <div className='App'></div>;
+	const test = () => {
+		axios.post("");
+	};
+
+	return (
+		<div className="App">
+			<button onClick={test}>test</button>
+		</div>
+	);
 }
 
 export default App;
