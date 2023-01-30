@@ -17,6 +17,7 @@ module.exports = {
 			if (passOne === passTwo) {
 				const hashedPass = await bcrypt.hash(passOne, 2);
 				const newUser = new UserSchema({
+					id,
 					nick,
 					pass: hashedPass,
 				});
