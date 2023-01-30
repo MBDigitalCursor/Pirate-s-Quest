@@ -1,8 +1,12 @@
 import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import "./login.css";
+import { setLogged } from "../../store/appStore";
 
 function Login() {
+	const dispatch = useDispatch();
+
 	const nickRef = useRef();
 	const passRef = useRef();
 
@@ -12,7 +16,14 @@ function Login() {
 			pass: passRef.current.value,
 		};
 
-		axios.post("http://localhost:5000/login", loginObj).then((response) => console.log(response));
+		axios.post("http://localhost:5000/login", loginObj).then((response) => {
+			if (response.data.error) {
+				console.log(response.data.message);
+			} else {
+				console.log("response.data.data ===", response.data.data);
+				dispatch(setLogged(response.data.data));
+			}
+		});
 	};
 
 	return (
