@@ -12,7 +12,6 @@ module.exports = {
 		if (passOne.lenght > 10) return res.send({ error: true, message: "Password too long" });
 		if (passOne !== passTwo) return res.send({ error: true, message: "Passwords does not match" });
 		const userExists = await UserSchema.find({ nick });
-		if (userExists) return res.send({ error: true, message: `User with nick ${nick} exists` });
 		if (!userExists) {
 			if (passOne === passTwo) {
 				const hashedPass = await bcrypt.hash(passOne, 2);
