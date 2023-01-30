@@ -13,8 +13,9 @@ function App() {
 	};
 
 	return (
-		<div className="App">
+		<div className='App'>
 			<button onClick={test}>test</button>
+			<h2>Test</h2>
 		</div>
 	);
 }
