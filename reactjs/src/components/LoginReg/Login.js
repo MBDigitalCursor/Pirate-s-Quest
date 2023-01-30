@@ -12,7 +12,7 @@ function Login() {
 			pass: passRef.current.value,
 		};
 
-		console.log("loginObj ===", loginObj);
+		axios.post("http://localhost:5000/login", loginObj).then((response) => console.log(response));
 	};
 
 	return (
