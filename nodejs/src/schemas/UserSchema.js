@@ -14,7 +14,23 @@ const UserSchema = new Schema({
 	gold: {
 		type: Number,
 		required: false,
-		default: 0,
+		default: 100,
+	},
+	upgrades: {
+		type: Object,
+		required: false,
+		default: {
+			dropPerClickLevel: 1,
+			critStrikeMultiplierLevel: 1,
+			critStrikeChanceLevel: 1,
+			delayPerClickLevel: 1,
+			autoIncomeQuantityLevel: 0,
+			autoIncomeTimeLevel: 1,
+			doubleDropChanceLevel: 0,
+			commonDropChanceLevel: 0,
+			rareDropChanceLevel: 0,
+			legendaryDropChanceLevel: 0,
+		},
 	},
 });
 
