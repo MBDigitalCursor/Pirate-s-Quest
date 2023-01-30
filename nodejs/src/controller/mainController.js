@@ -5,13 +5,14 @@ const UserSchema = require("../schemas/UserSchema");
 
 module.exports = {
 	register: async (req, res) => {
+		console.log(req.body);
 		const { nick, passOne, passTwo } = req.body;
 		const id = await uid(5);
 		if (nick.lenght <= 3) return res.send({ error: true, message: "Nickname should be at least 3 symbols" });
 		if (passOne.lenght <= 3) return res.send({ error: true, message: "Password should be at least 3 symbols" });
 		if (passOne.lenght > 10) return res.send({ error: true, message: "Password too long" });
 		if (passOne !== passTwo) return res.send({ error: true, message: "Passwords does not match" });
-		const userExists = await UserSchema.find({ nick });
+		const userExists = await UserSchema.findOne({ nick });
 		if (!userExists) {
 			if (passOne === passTwo) {
 				const hashedPass = await bcrypt.hash(passOne, 2);
