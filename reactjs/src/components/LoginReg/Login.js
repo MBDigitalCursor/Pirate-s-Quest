@@ -3,9 +3,11 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import "./login.css";
 import { setLogged } from "../../store/appStore";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 	const dispatch = useDispatch();
+	const nav = useNavigate();
 
 	const nickRef = useRef();
 	const passRef = useRef();
@@ -22,6 +24,7 @@ function Login() {
 			} else {
 				console.log("response.data.data ===", response.data.data);
 				dispatch(setLogged(response.data.data));
+				nav("/main");
 			}
 		});
 	};
