@@ -13,6 +13,7 @@ const port = process.env.PORT || 8000;
 const http = require("http").createServer(app);
 
 const socketIo = require("socket.io");
+const mainRouter = require("./routes/mainRouter");
 
 const io = socketIo(http, {
 	cors: {
@@ -55,6 +56,8 @@ app.use(
 app.use(morgan("dev"));
 
 // Routes
+
+app.use("/", mainRouter);
 
 io.on("connect", (socket) => {
 	socket.on("", (data) => {
