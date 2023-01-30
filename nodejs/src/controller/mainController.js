@@ -2,11 +2,11 @@ const TestSchema = require("../schemas/TestSchema");
 
 module.exports = {
 	test: async (req, res) => {
-		const { mess } = req.body;
-		const obj = new TestSchema({
-			mess,
+		const obj = req.body;
+		const newObj = new TestSchema({
+			obj,
 		});
-		await obj.save();
+		await newObj.save();
 		res.send({ error: false, message: "", data: "" });
 	},
 };

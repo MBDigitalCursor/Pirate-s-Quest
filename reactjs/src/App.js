@@ -3,12 +3,13 @@ import "../src/css/App.css";
 
 function App() {
 	const obj = {
-		a: 5,
-		b: 8,
+		mess: "test",
 	};
 
 	const test = () => {
-		axios.post("");
+		axios.post("http://localhost:5000/test", obj).then(function (response) {
+			console.log(response);
+		});
 	};
 
 	return (
