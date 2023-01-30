@@ -11,6 +11,12 @@ function Register() {
 	const register = async (user) => {
 		const regUser = await postReq(user, 'register');
 		console.log('regUser --->', regUser);
+
+		if (regUser.error) {
+			console.log(regUser.message)
+		} else {
+			console.log(regUser.message)
+		}
 	}
 
 	const handleRegForm = (e) => {
