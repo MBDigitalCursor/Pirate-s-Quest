@@ -6,7 +6,7 @@ Repeatedly click to earn gold until you have enough money to purchase the first 
 
 ## Authors
 
-[@viktoraskris](https://github.com/orgs/MBDigitalCursor/people/viktoraskris)
+[@viktoraskris](https://github.com/viktoraskris)
 [@Mixmln](https://github.com/Mixmln)
 [@ivenckunas](https://github.com/ivenckunas)
 ## This project was built using:
