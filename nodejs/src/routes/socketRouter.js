@@ -27,13 +27,17 @@ const ranks = [
 	},
 ];
 
-const checkRank = (exp) => {};
+// const checkRank = (exp) => {
+// 	const ans = ranks.map((rank) => rank.exp < exp);
+// 	console.log("exp ===", exp);
+// 	console.log("ans ===", ans);
+// };
 
 module.exports = (io) => {
 	io.on("connect", (socket) => {
 		socket.on("addGold", async (id) => {
 			const foundUser = await UserSchema.findOne({ id });
-
+			checkRank(foundUser.rank.exp);
 			if (foundUser) {
 				await UserSchema.findOneAndUpdate(
 					{ id },
