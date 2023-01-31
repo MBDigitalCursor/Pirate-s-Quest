@@ -1,21 +1,26 @@
+import { Modal, Typography } from "@mui/material";
 import { Box, Stack } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import GameWindow from "../../components/GameWindow/GameWindow";
 import Leadersboard from "../../components/LeadersBoard/Leadersboard";
 import Profile from "../../components/ProfileComp/Profile";
 import RankComp from "../../components/RankComp/RankComp";
 import UpgradesWindow from "../../components/UpgradesComp/UpgradesWindow";
+import MainContext from "../../context/MainContext";
+import { setOpenModal } from "../../store/appStore";
 import "../MainPage/mainPage.css";
 
 function Main() {
 	const { mousePos, logged } = useSelector((state) => state.appStore);
 
+	const { dispatch, socket } = useContext(MainContext);
+
 	const [showDrop, setShowDrop] = useState(false);
 
 	return (
 		<div
-			className="main-page"
+			className='main-page text-focus-in'
 			style={{
 				position: "relative",
 				display: "flex",
@@ -51,11 +56,11 @@ function Main() {
 						color: "#621708",
 					}}
 				>
-					{(logged.upgrades.dropPerClickLevel / 10 + 1).toFixed(1)}
+					{logged && (logged.upgrades.dropPerClickLevel / 10 + 1).toFixed(1)}
 				</p>
 			)}
 			<Stack
-				direction="row"
+				direction='row'
 				spacing={6}
 			>
 				<UpgradesWindow></UpgradesWindow>
@@ -65,7 +70,6 @@ function Main() {
 				></GameWindow>
 				<Leadersboard></Leadersboard>
 			</Stack>
-
 			<RankComp></RankComp>
 			<Profile></Profile>
 		</div>

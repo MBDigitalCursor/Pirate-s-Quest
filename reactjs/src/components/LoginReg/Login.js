@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "./login.css";
-import { setLogged, setLoginError, setNewUser } from "../../store/appStore";
+import { setLogged, setLoginError, setNewUser, setOpenModal } from "../../store/appStore";
 import { Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
@@ -29,6 +29,7 @@ function Login() {
 				dispatch(setLoginError(response.data.message));
 			} else {
 				console.log("response.data.data ===", response.data.data);
+				localStorage.setItem("user_id", response.data.data.id);
 				dispatch(setLogged(response.data.data));
 				nav("/main");
 			}
@@ -37,8 +38,8 @@ function Login() {
 
 	return (
 		<Container
-			component="main"
-			maxWidth="xs"
+			component='main'
+			maxWidth='xs'
 		>
 			<Box
 				className={loginError ? "slide-top" : ""}
@@ -57,18 +58,18 @@ function Login() {
 				>
 					{loginError ? (
 						<BsFillPersonXFill
-							className="login-icon-error flip-2-hor-top-1 "
-							fontSize="2rem"
+							className='login-icon-error flip-2-hor-top-1 '
+							fontSize='2rem'
 						/>
 					) : (
 						<BsFillPersonCheckFill
-							className="login-icon"
-							fontSize="2rem"
+							className='login-icon'
+							fontSize='2rem'
 						/>
 					)}
 					<Typography
-						component="h1"
-						variant="h5"
+						component='h1'
+						variant='h5'
 						sx={{
 							marginTop: "1rem",
 							color: "#000",
@@ -81,23 +82,23 @@ function Login() {
 					<Box>
 						<TextField
 							inputRef={nickRef}
-							margin="normal"
+							margin='normal'
 							required
 							fullWidth
-							label="Nickname"
+							label='Nickname'
 							autoFocus
 						/>
 						<TextField
 							inputRef={passRef}
-							margin="normal"
-							color="primary"
+							margin='normal'
+							color='primary'
 							required
 							fullWidth
-							name="password"
-							label="Password"
-							type="password"
-							id="password"
-							autoComplete="current-password"
+							name='password'
+							label='Password'
+							type='password'
+							id='password'
+							autoComplete='current-password'
 						/>
 					</Box>
 				) : (
@@ -106,9 +107,9 @@ function Login() {
 							inputRef={nickRef}
 							error
 							fullWidth
-							id="outlined-error-helper-text"
-							label="Error"
-							color="primary"
+							id='outlined-error-helper-text'
+							label='Error'
+							color='primary'
 							helperText={loginError}
 							sx={{
 								marginTop: "0.55rem",
@@ -117,14 +118,14 @@ function Login() {
 						/>
 						<TextField
 							inputRef={passRef}
-							margin="normal"
+							margin='normal'
 							required
 							fullWidth
-							name="password"
-							label="Password"
-							type="password"
-							id="password"
-							autoComplete="current-password"
+							name='password'
+							label='Password'
+							type='password'
+							id='password'
+							autoComplete='current-password'
 						/>
 					</Box>
 				)}
@@ -134,8 +135,8 @@ function Login() {
 					<Button
 						onClick={handleLogin}
 						fullWidth
-						color="errorRed"
-						variant="contained"
+						color='errorRed'
+						variant='contained'
 						sx={{
 							mt: 3,
 							mb: 2,
@@ -151,8 +152,8 @@ function Login() {
 					<Button
 						onClick={handleLogin}
 						fullWidth
-						color="gold"
-						variant="contained"
+						color='gold'
+						variant='contained'
 						sx={{
 							mt: 3,
 							mb: 2,

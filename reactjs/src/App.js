@@ -7,6 +7,8 @@ import { createTheme } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 import { io } from "socket.io-client";
 import MainContext from "../src/context/MainContext";
+import { useEffect } from "react";
+import { setLogged } from "./store/appStore";
 
 const socket = io.connect("http://localhost:5000");
 
@@ -24,6 +26,18 @@ const theme = createTheme({
 function App() {
 	const dispatch = useDispatch();
 
+	useEffect(() => {
+		socket.emit("checkUser", localStorage.getItem("user_id"));
+		console.log("User data sended to server");
+	}, [socket]);
+
+	useEffect(() => {
+		socket.on("checkedUser", (user) => {
+			console.log("User data received ==>", user);
+			dispatch(setLogged(user));
+		});
+	}, [socket]);
+
 	const states = {
 		dispatch,
 		socket,
@@ -35,11 +49,11 @@ function App() {
 				<BrowserRouter>
 					<Routes>
 						<Route
-							path="/"
+							path='/'
 							element={<LoginRegPage />}
 						/>
 						<Route
-							path="/main"
+							path='/main'
 							element={<Main></Main>}
 						></Route>
 					</Routes>

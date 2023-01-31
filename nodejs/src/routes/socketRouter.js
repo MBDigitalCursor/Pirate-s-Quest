@@ -37,7 +37,7 @@ module.exports = (io) => {
 	io.on("connect", (socket) => {
 		socket.on("addGold", async (id) => {
 			const foundUser = await UserSchema.findOne({ id });
-			checkRank(foundUser.rank.exp);
+			// checkRank(foundUser.rank.exp);
 			if (foundUser) {
 				await UserSchema.findOneAndUpdate(
 					{ id },
@@ -50,6 +50,14 @@ module.exports = (io) => {
 				);
 				const updatedUser = await UserSchema.findOne({ id });
 				socket.emit("updatedUser", updatedUser);
+			}
+		});
+		socket.on("checkUser", async (id) => {
+			const user = await UserSchema.findOne({ id });
+			if (user) {
+				socket.emit("checkedUser", user);
+			} else {
+				socket.emit("checkedUser", null);
 			}
 		});
 	});
