@@ -23,10 +23,59 @@
   margin-bottom: 1rem;
 }
 
-.login-inputs input::placeholder {
-  padding: 0.5rem;
+.login-btn {
+  margin: 1rem 0;
+  padding: 0.5rem 2rem;
 }
 
-.login-btn {
-  padding: 0.5rem 2rem;
+.login-icon {
+  color: #F6AA1C;
+}
+
+.login-icon-error {
+  color: #941B0C;
+}
+
+.flip-2-hor-top-1 {
+  animation: flip-2-hor-top-1 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+@keyframes flip-2-hor-top-1 {
+  0% {
+    transform: translateY(0) rotateX(0);
+    transform-origin: 30% 0%;
+  }
+
+  100% {
+    transform: translateY(5px) rotateX(-360deg);
+    transform-origin: 50% 100%;
+  }
+}
+
+.slide-top {
+  animation: slide-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) forwards;
+}
+
+@keyframes slide-top {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-2px);
+  }
+}
+
+.slide-down {
+  animation: slide-down 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) forwards;
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-2px);
+  }
+
+  100% {
+    transform: translateY(2px);
+  }
 }
