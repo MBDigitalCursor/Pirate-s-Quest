@@ -23,8 +23,6 @@ function Login() {
 			pass: passRef.current.value,
 		};
 
-		console.log("loginObj ===", loginObj);
-
 		axios.post("http://localhost:5000/login", loginObj).then((response) => {
 			if (response.data.error) {
 				console.log(response.data.message);

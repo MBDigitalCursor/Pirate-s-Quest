@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "../GameWindow/gameWindow.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,11 +7,18 @@ import { setMousePos } from "../../store/appStore";
 function GameWindow({ setShowDrop, showDrop }) {
 	const [shakeTo, setShakeTo] = useState("left");
 
-	const { mousePos } = useSelector((state) => state.appStore);
+	const { logged } = useSelector((state) => state.appStore);
 
 	const dispatch = useDispatch();
 
+	const addGold = () => {
+		const uObj = {
+			id: logged.id,
+		};
+	};
+
 	const handleClick = (e) => {
+		console.log("logged ===", logged);
 		if (!e.target) dispatch(setMousePos({}));
 		const handleMouseMove = (event) => {
 			dispatch(setMousePos({ x: event.clientX, y: event.clientY }));
@@ -54,17 +61,21 @@ function GameWindow({ setShowDrop, showDrop }) {
 					right: "5%",
 				}}
 			>
-				<b>Gold:</b> 100
+				<b>Gold:</b> {logged.gold}
 			</p>
-			<button
-				style={{
+
+			<Button
+				color="gold"
+				variant="contained"
+				sx={{
+					marginRight: "0.3rem",
 					position: "absolute",
 					top: "2%",
 					left: "5%",
 				}}
 			>
 				Upgrades
-			</button>
+			</Button>
 
 			{shakeTo === "left" ? (
 				<img
@@ -73,9 +84,9 @@ function GameWindow({ setShowDrop, showDrop }) {
 						handleShake();
 						handleClick(e);
 					}}
-					className='clickable-object shake-left'
-					src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images'
-					alt=''
+					className="clickable-object shake-left"
+					src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images"
+					alt=""
 				/>
 			) : (
 				<img
@@ -83,9 +94,9 @@ function GameWindow({ setShowDrop, showDrop }) {
 						handleShake();
 						handleClick(e);
 					}}
-					className='clickable-object shake-right'
-					src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images'
-					alt=''
+					className="clickable-object shake-right"
+					src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images"
+					alt=""
 				/>
 			)}
 		</Box>
