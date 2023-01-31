@@ -40,6 +40,11 @@ const UserSchema = new Schema({
 			exp: 0,
 		},
 	},
+	profileImage: {
+		type: String,
+		required: false,
+		default: "https://images-ext-2.discordapp.net/external/4Whw1T9tnEZqQHWAe_r4mjZ21gIjiPpz0azU4f5bPVA/%3Fw%3D2000/https/img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?width=676&height=676",
+	},
 });
 
 module.exports = mongoose.model("gameUsers", UserSchema);
