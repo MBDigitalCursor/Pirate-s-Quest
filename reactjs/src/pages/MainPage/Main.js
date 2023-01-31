@@ -9,7 +9,7 @@ import UpgradesWindow from "../../components/UpgradesComp/UpgradesWindow";
 import "../MainPage/mainPage.css";
 
 function Main() {
-	const { mousePos } = useSelector((state) => state.appStore);
+	const { mousePos, logged } = useSelector((state) => state.appStore);
 
 	const [showDrop, setShowDrop] = useState(false);
 
@@ -36,7 +36,7 @@ function Main() {
 						color: "#621708",
 					}}
 				>
-					1
+					{(logged.upgrades.dropPerClickLevel / 10 + 1).toFixed(1)}
 				</p>
 			) : (
 				<p
@@ -51,7 +51,7 @@ function Main() {
 						color: "#621708",
 					}}
 				>
-					1
+					{(logged.upgrades.dropPerClickLevel / 10 + 1).toFixed(1)}
 				</p>
 			)}
 			<Stack
