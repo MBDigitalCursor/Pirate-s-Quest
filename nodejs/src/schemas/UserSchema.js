@@ -29,7 +29,15 @@ const UserSchema = new Schema({
 			doubleDropChanceLevel: 0,
 			commonDropChanceLevel: 0,
 			rareDropChanceLevel: 0,
-			legendaryDropChanceLevel: 0,
+			epicDropChanceLevel: 0,
+		},
+	},
+	rank: {
+		type: Object,
+		required: false,
+		default: {
+			rank: "Newbie",
+			exp: 0,
 		},
 	},
 });
