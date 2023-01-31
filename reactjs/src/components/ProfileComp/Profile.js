@@ -22,6 +22,7 @@ function Profile() {
 				display: "flex",
 				justifyContent: "flex-start",
 				gap: "1rem",
+				backdropFilter: "blur(4px)",
 			}}
 		>
 			<img

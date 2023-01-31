@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import "../GameWindow/gameWindow.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setMousePos } from "../../store/appStore";
+import axios from "axios";
 
 function GameWindow({ setShowDrop, showDrop }) {
 	const [shakeTo, setShakeTo] = useState("left");
 
-	const { logged } = useSelector((state) => state.appStore);
+	const { logged, url } = useSelector((state) => state.appStore);
 
 	const dispatch = useDispatch();
 
@@ -15,6 +16,8 @@ function GameWindow({ setShowDrop, showDrop }) {
 		const uObj = {
 			id: logged.id,
 		};
+
+		axios.post(`${url}/`);
 	};
 
 	const handleClick = (e) => {
@@ -52,6 +55,7 @@ function GameWindow({ setShowDrop, showDrop }) {
 				display: "flex",
 				justifyContent: "center",
 				alignItems: "center",
+				backdropFilter: "blur(4px)",
 			}}
 		>
 			<p
@@ -59,6 +63,7 @@ function GameWindow({ setShowDrop, showDrop }) {
 					position: "absolute",
 					top: "2%",
 					right: "5%",
+					paddingTop: "0.3rem",
 				}}
 			>
 				<b>Gold:</b> {logged && logged.gold}

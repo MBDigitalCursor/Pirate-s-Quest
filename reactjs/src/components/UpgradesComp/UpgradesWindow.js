@@ -10,9 +10,10 @@ function UpgradesWindow() {
 				boxShadow: "3px 3px 10px 1px #3b3939ad",
 				borderRadius: "4px",
 				width: "18rem",
+				backdropFilter: "blur(4px)",
 			}}
 		>
-			UpgradesWindow
+			<h1>Upgrades</h1>
 		</div>
 	);
 }

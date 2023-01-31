@@ -34,9 +34,7 @@ function Register() {
 				console.log(response.data.message);
 				dispatch(setLoginError(response.data.message));
 			} else {
-				setTimeout(() => {
-					nav("/main");
-				}, 500);
+				dispatch(setNewUser(true));
 			}
 		});
 	};
