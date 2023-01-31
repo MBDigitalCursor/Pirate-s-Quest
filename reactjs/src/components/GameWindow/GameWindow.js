@@ -1,23 +1,20 @@
 import { Box, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../GameWindow/gameWindow.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { setMousePos } from "../../store/appStore";
 import axios from "axios";
+import MainContext from "../../context/MainContext";
 
 function GameWindow({ setShowDrop, showDrop }) {
+	const { dispatch, socket } = useContext(MainContext);
+
 	const [shakeTo, setShakeTo] = useState("left");
 
 	const { logged, url } = useSelector((state) => state.appStore);
 
-	const dispatch = useDispatch();
-
 	const addGold = () => {
-		const uObj = {
-			id: logged.id,
-		};
-
-		axios.post(`${url}/`);
+		socket.emit("addGold", logged.id);
 	};
 
 	const handleClick = (e) => {
@@ -41,6 +38,12 @@ function GameWindow({ setShowDrop, showDrop }) {
 		if (shakeTo === "left") setShakeTo("right");
 		if (shakeTo === "right") setShakeTo("left");
 	};
+
+	useEffect(() => {
+		socket.on("updatedUser", (user) => {
+			console.log(user);
+		});
+	}, [socket]);
 
 	return (
 		<Box
@@ -88,6 +91,7 @@ function GameWindow({ setShowDrop, showDrop }) {
 						handleTimeout();
 						handleShake();
 						handleClick(e);
+						addGold();
 					}}
 					className="clickable-object shake-left"
 					src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images"

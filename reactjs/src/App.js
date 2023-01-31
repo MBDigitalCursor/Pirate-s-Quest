@@ -1,10 +1,14 @@
-import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../src/css/App.css";
 import LoginRegPage from "./pages/LoginRegPage/LoginRegPage";
 import Main from "./pages/MainPage/Main";
 import { ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import { io } from "socket.io-client";
+import MainContext from "../src/context/MainContext";
+
+const socket = io.connect("http://localhost:5000");
 
 const theme = createTheme({
 	palette: {
@@ -18,21 +22,30 @@ const theme = createTheme({
 });
 
 function App() {
+	const dispatch = useDispatch();
+
+	const states = {
+		dispatch,
+		socket,
+	};
+
 	return (
-		<ThemeProvider theme={theme}>
-			<BrowserRouter>
-				<Routes>
-					<Route
-						path="/"
-						element={<LoginRegPage />}
-					/>
-					<Route
-						path="/main"
-						element={<Main></Main>}
-					></Route>
-				</Routes>
-			</BrowserRouter>
-		</ThemeProvider>
+		<MainContext.Provider value={states}>
+			<ThemeProvider theme={theme}>
+				<BrowserRouter>
+					<Routes>
+						<Route
+							path="/"
+							element={<LoginRegPage />}
+						/>
+						<Route
+							path="/main"
+							element={<Main></Main>}
+						></Route>
+					</Routes>
+				</BrowserRouter>
+			</ThemeProvider>
+		</MainContext.Provider>
 	);
 }
 
