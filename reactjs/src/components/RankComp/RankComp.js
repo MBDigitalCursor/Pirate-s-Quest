@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, LinearProgress } from "@mui/material";
 import { useSelector } from "react-redux";
+import MainContext from "../../context/MainContext.js";
+import { setProgress } from "../../store/appStore.js";
 
 function RankComp() {
-	const [progress, setProgress] = useState(0);
+	const { socket, dispatch } = useContext(MainContext);
 
-	const { logged } = useSelector((state) => state.appStore);
+	const { logged, progress } = useSelector((state) => state.appStore);
 
 	return (
 		<div
@@ -34,11 +36,11 @@ function RankComp() {
 				}}
 			>
 				<LinearProgress
+					variant='determinate'
+					value={progress}
 					sx={{
 						height: "10px",
 					}}
-					variant="determinate"
-					value={progress}
 				/>
 				{logged.rank.exp}
 			</Box>
