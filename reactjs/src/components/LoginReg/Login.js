@@ -1,13 +1,18 @@
 import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "./login.css";
-import { setLogged } from "../../store/appStore";
+import { setLogged, setLoginError } from "../../store/appStore";
 import { useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import { Button, createTheme, ThemeProvider, Typography } from "@mui/material";
+import { Box, Container } from "@mui/system";
+import { BsFillPersonXFill, BsFillPersonCheckFill } from "react-icons/bs";
 
 function Login() {
 	const dispatch = useDispatch();
 	const nav = useNavigate();
+	const { loginError } = useSelector((state) => state.appStore);
 
 	const nickRef = useRef();
 	const passRef = useRef();
@@ -18,9 +23,12 @@ function Login() {
 			pass: passRef.current.value,
 		};
 
+		console.log("loginObj ===", loginObj);
+
 		axios.post("http://localhost:5000/login", loginObj).then((response) => {
 			if (response.data.error) {
 				console.log(response.data.message);
+				dispatch(setLoginError(response.data.message));
 			} else {
 				console.log("response.data.data ===", response.data.data);
 				dispatch(setLogged(response.data.data));
@@ -30,27 +38,134 @@ function Login() {
 	};
 
 	return (
-		<div className="login">
-			<h2>Login</h2>
-			<div className="login-inputs">
-				<input
-					ref={nickRef}
-					type="text"
-					placeholder="nickname"
-				/>
-				<input
-					ref={passRef}
-					type="password"
-					placeholder="password"
-				/>
-			</div>
-			<button
-				className="login-btn"
-				onClick={handleLogin}
+		<Container
+			component="main"
+			maxWidth="xs"
+		>
+			<Box
+				className={loginError ? "slide-top" : ""}
+				sx={{
+					marginTop: 7,
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+				}}
 			>
-				login
-			</button>
-		</div>
+				<Box
+					className={loginError ? "slide-top" : ""}
+					sx={{
+						textAlign: "center",
+					}}
+				>
+					{loginError ? (
+						<BsFillPersonXFill
+							className="login-icon-error flip-2-hor-top-1 "
+							fontSize="2rem"
+						/>
+					) : (
+						<BsFillPersonCheckFill
+							className="login-icon"
+							fontSize="2rem"
+						/>
+					)}
+					<Typography
+						component="h1"
+						variant="h5"
+						sx={{
+							marginTop: "1rem",
+							color: "#000",
+						}}
+					>
+						Sign in
+					</Typography>
+				</Box>
+				{!loginError ? (
+					<Box>
+						<TextField
+							inputRef={nickRef}
+							margin="normal"
+							required
+							fullWidth
+							label="Nickname"
+							autoFocus
+						/>
+						<TextField
+							inputRef={passRef}
+							margin="normal"
+							color="primary"
+							required
+							fullWidth
+							name="password"
+							label="Password"
+							type="password"
+							id="password"
+							autoComplete="current-password"
+						/>
+					</Box>
+				) : (
+					<Box>
+						<TextField
+							inputRef={nickRef}
+							error
+							fullWidth
+							id="outlined-error-helper-text"
+							label="Error"
+							color="primary"
+							helperText={loginError}
+							sx={{
+								marginTop: "0.55rem",
+								outlineColor: "green",
+							}}
+						/>
+						<TextField
+							inputRef={passRef}
+							margin="normal"
+							required
+							fullWidth
+							name="password"
+							label="Password"
+							type="password"
+							id="password"
+							autoComplete="current-password"
+						/>
+					</Box>
+				)}
+			</Box>
+			{loginError ? (
+				<Box className={loginError ? "slide-down" : ""}>
+					<Button
+						onClick={handleLogin}
+						fullWidth
+						color="errorRed"
+						variant="contained"
+						sx={{
+							mt: 3,
+							mb: 2,
+							fontWeight: "bold",
+							color: "white",
+						}}
+					>
+						Sign In
+					</Button>
+				</Box>
+			) : (
+				<Box className={loginError ? "slide-down" : ""}>
+					<Button
+						onClick={handleLogin}
+						fullWidth
+						color="gold"
+						variant="contained"
+						sx={{
+							mt: 3,
+							mb: 2,
+							fontWeight: "bold",
+						}}
+					>
+						Sign In
+					</Button>
+				</Box>
+			)}
+		</Container>
 	);
 }
 
