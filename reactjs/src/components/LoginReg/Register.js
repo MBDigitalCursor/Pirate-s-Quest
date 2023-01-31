@@ -50,7 +50,7 @@ function Register() {
 				<Box
 					className={loginError ? "slide-top" : ""}
 					sx={{
-						marginTop: 7,
+						marginTop: 1,
 						display: "flex",
 						flexDirection: "column",
 						alignItems: "center",
