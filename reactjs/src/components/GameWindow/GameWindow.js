@@ -61,7 +61,7 @@ function GameWindow({ setShowDrop, showDrop }) {
 					right: "5%",
 				}}
 			>
-				<b>Gold:</b> {logged.gold}
+				<b>Gold:</b> {logged && logged.gold}
 			</p>
 
 			<Button
