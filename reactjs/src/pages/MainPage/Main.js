@@ -1,3 +1,4 @@
+import { Box, Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import GameWindow from "../../components/GameWindow/GameWindow";
@@ -14,7 +15,7 @@ function Main() {
 
 	return (
 		<div
-			className='main-page'
+			className="main-page"
 			style={{
 				position: "relative",
 				display: "flex",
@@ -53,15 +54,20 @@ function Main() {
 					1
 				</p>
 			)}
+			<Stack
+				direction="row"
+				spacing={6}
+			>
+				<UpgradesWindow></UpgradesWindow>
+				<GameWindow
+					setShowDrop={setShowDrop}
+					showDrop={showDrop}
+				></GameWindow>
+				<Leadersboard></Leadersboard>
+			</Stack>
 
-			<UpgradesWindow></UpgradesWindow>
 			<RankComp></RankComp>
 			<Profile></Profile>
-			<GameWindow
-				setShowDrop={setShowDrop}
-				showDrop={showDrop}
-			></GameWindow>
-			<Leadersboard></Leadersboard>
 		</div>
 	);
 }
