@@ -11,19 +11,24 @@ function GameWindow() {
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
+	const handleClick = (e) => {
+		console.log("e ===", e.target);
+		if (!e.target) dispatch(setMousePos({}));
 		const handleMouseMove = (event) => {
 			dispatch(setMousePos({ x: event.clientX, y: event.clientY }));
 		};
-		window.addEventListener("click", handleMouseMove);
-		return () => {
-			window.removeEventListener("click", handleMouseMove);
-		};
-	}, [mousePos]);
+		e.target.addEventListener("click", handleMouseMove);
+	};
 
-	useEffect(() => {
-		console.log("mousePos ===", mousePos);
-	}, [mousePos]);
+	// useEffect(() => {
+	// 	const handleMouseMove = (event) => {
+	// 		dispatch(setMousePos({ x: event.clientX, y: event.clientY }));
+	// 	};
+	// 	window.addEventListener("click", handleMouseMove);
+	// 	return () => {
+	// 		window.removeEventListener("click", handleMouseMove);
+	// 	};
+	// }, [mousePos]);
 
 	const handleShake = () => {
 		if (shakeTo === "left") setShakeTo("right");
@@ -66,14 +71,20 @@ function GameWindow() {
 
 			{shakeTo === "left" ? (
 				<img
-					onClick={handleShake}
+					onClick={(e) => {
+						handleShake();
+						handleClick(e);
+					}}
 					className='clickable-object shake-left'
 					src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images'
 					alt=''
 				/>
 			) : (
 				<img
-					onClick={handleShake}
+					onClick={(e) => {
+						handleShake();
+						handleClick(e);
+					}}
 					className='clickable-object shake-right'
 					src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images'
 					alt=''
