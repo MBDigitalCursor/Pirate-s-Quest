@@ -13,6 +13,8 @@ const port = process.env.PORT || 8000;
 const http = require("http").createServer(app);
 
 const socketIo = require("socket.io");
+const socketRouter = require("./routes/socketRouter");
+
 const mainRouter = require("./routes/mainRouter");
 
 const io = socketIo(http, {
@@ -59,8 +61,4 @@ app.use(morgan("dev"));
 
 app.use("/", mainRouter);
 
-io.on("connect", (socket) => {
-	socket.on("", (data) => {
-		console.log("Data ==> ", data);
-	});
-});
+socketRouter(io);
