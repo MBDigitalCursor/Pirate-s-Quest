@@ -49,10 +49,10 @@ function Login() {
 			<Box
 				className={loginError ? "slide-top" : ""}
 				sx={{
-					marginTop: 7,
 					display: "flex",
 					flexDirection: "column",
 					alignItems: "center",
+					justifyContent: "start",
 				}}
 			>
 				<Box
