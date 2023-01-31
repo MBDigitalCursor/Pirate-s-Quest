@@ -1,4 +1,3 @@
-import { Modal, Typography } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -8,7 +7,6 @@ import Profile from "../../components/ProfileComp/Profile";
 import RankComp from "../../components/RankComp/RankComp";
 import UpgradesWindow from "../../components/UpgradesComp/UpgradesWindow";
 import MainContext from "../../context/MainContext";
-import { setOpenModal } from "../../store/appStore";
 import "../MainPage/mainPage.css";
 
 function Main() {
