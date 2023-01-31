@@ -2,17 +2,17 @@ import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "./login.css";
-import { setLogged, setLoginError } from "../../store/appStore";
-import { useNavigate } from "react-router-dom";
+import { setLogged, setLoginError, setNewUser } from "../../store/appStore";
+import { Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
-import { Button, createTheme, ThemeProvider, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import { BsFillPersonXFill, BsFillPersonCheckFill } from "react-icons/bs";
 
 function Login() {
 	const dispatch = useDispatch();
 	const nav = useNavigate();
-	const { loginError } = useSelector((state) => state.appStore);
+	const { loginError, newUser } = useSelector((state) => state.appStore);
 
 	const nickRef = useRef();
 	const passRef = useRef();
@@ -35,6 +35,10 @@ function Login() {
 				nav("/main");
 			}
 		});
+	};
+
+	const handleNewUser = () => {
+		dispatch(setNewUser(!newUser));
 	};
 
 	return (
@@ -165,6 +169,20 @@ function Login() {
 					</Button>
 				</Box>
 			)}
+			<Box
+				sx={{
+					textAlign: "center",
+					color: "black",
+				}}
+			>
+				<Link
+					onClick={() => {
+						dispatch(setNewUser(!newUser));
+					}}
+				>
+					New? Register first
+				</Link>
+			</Box>
 		</Container>
 	);
 }
