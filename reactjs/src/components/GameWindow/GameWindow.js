@@ -18,7 +18,6 @@ function GameWindow({ setShowDrop, showDrop }) {
 	};
 
 	const handleClick = (e) => {
-		console.log("logged ===", logged);
 		if (!e.target) dispatch(setMousePos({}));
 		const handleMouseMove = (event) => {
 			dispatch(setMousePos({ x: event.clientX, y: event.clientY }));
