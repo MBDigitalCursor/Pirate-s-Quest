@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Box, LinearProgress } from "@mui/material";
+import { useSelector } from "react-redux";
 
 function RankComp() {
 	const [progress, setProgress] = useState(0);
+
+	const { logged } = useSelector((state) => state.appStore);
 
 	return (
 		<div
@@ -14,7 +17,7 @@ function RankComp() {
 				top: "3rem",
 			}}
 		>
-			<p>RANK</p>
+			<p>{logged.rank.rank}</p>
 			<Box
 				sx={{
 					width: "20rem",
@@ -34,10 +37,10 @@ function RankComp() {
 					sx={{
 						height: "10px",
 					}}
-					variant='determinate'
+					variant="determinate"
 					value={progress}
 				/>
-				20
+				{logged.rank.exp}
 			</Box>
 		</div>
 	);

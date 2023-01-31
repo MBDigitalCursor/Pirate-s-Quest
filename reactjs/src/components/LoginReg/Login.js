@@ -35,10 +35,6 @@ function Login() {
 		});
 	};
 
-	const handleNewUser = () => {
-		dispatch(setNewUser(!newUser));
-	};
-
 	return (
 		<Container
 			component="main"

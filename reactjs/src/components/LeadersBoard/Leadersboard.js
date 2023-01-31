@@ -11,6 +11,7 @@ function Leadersboard() {
 				height: "25rem",
 				boxShadow: "3px 3px 10px 1px #3b3939ad",
 				borderRadius: "4px",
+				backdropFilter: "blur(4px)",
 			}}
 		>
 			Leadersboard
