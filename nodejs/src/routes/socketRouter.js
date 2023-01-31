@@ -11,10 +11,14 @@ module.exports = (io) => {
 						$inc: {
 							gold: 1 + foundUser.upgrades.dropPerClickLevel / 10,
 						},
+						$inc: {
+							rank: {
+								exp: 1,
+							},
+						},
 					}
 				);
 				const updatedUser = await UserSchema.findOne({ id });
-				console.log("updatedUser ===", updatedUser);
 				socket.emit("updatedUser", updatedUser);
 			}
 		});
