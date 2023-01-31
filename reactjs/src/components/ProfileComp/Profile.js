@@ -12,7 +12,7 @@ function Profile() {
 				boxSizing: "border-box",
 				boxShadow: "3px 3px 10px 1px #3b3939ad",
 				borderRadius: "4px",
-				top: "10px",
+				top: "4rem",
 				right: "5%",
 			}}
 		>

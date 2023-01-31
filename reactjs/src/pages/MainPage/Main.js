@@ -1,40 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import GameWindow from "../../components/GameWindow/GameWindow";
 import Leadersboard from "../../components/LeadersBoard/Leadersboard";
 import Profile from "../../components/ProfileComp/Profile";
 import RankComp from "../../components/RankComp/RankComp";
 import UpgradesWindow from "../../components/UpgradesComp/UpgradesWindow";
+import "../MainPage/mainPage.css";
 
 function Main() {
 	const { mousePos } = useSelector((state) => state.appStore);
 
+	const [showDrop, setShowDrop] = useState(false);
+
 	return (
 		<div
+			className='main-page'
 			style={{
 				position: "relative",
 				display: "flex",
 				justifyContent: "center",
-				paddingTop: "5rem",
+				paddingTop: "10rem",
 			}}
 		>
-			<p
-				style={{
-					position: "absolute",
-					top: `${mousePos.y - 50}px`,
-					left: mousePos.x,
-					fontSize: "2rem",
-					zIndex: 10,
-					fontWeight: "bold",
-					color: "#621708",
-				}}
-			>
-				1
-			</p>
+			{showDrop ? (
+				<p
+					className={`${showDrop ? "scale-out-top" : ""}`}
+					style={{
+						position: "absolute",
+						top: `${mousePos.y - 80}px`,
+						left: mousePos.x,
+						fontSize: "2rem",
+						zIndex: 10,
+						fontWeight: "bold",
+						color: "#621708",
+					}}
+				>
+					1
+				</p>
+			) : (
+				<p
+					className={`${showDrop ? "" : "scale-out-bottom"}`}
+					style={{
+						position: "absolute",
+						top: `${mousePos.y - 80}px`,
+						left: mousePos.x,
+						fontSize: "2rem",
+						zIndex: 10,
+						fontWeight: "bold",
+						color: "#621708",
+					}}
+				>
+					1
+				</p>
+			)}
+
 			<UpgradesWindow></UpgradesWindow>
 			<RankComp></RankComp>
 			<Profile></Profile>
-			<GameWindow></GameWindow>
+			<GameWindow
+				setShowDrop={setShowDrop}
+				showDrop={showDrop}
+			></GameWindow>
 			<Leadersboard></Leadersboard>
 		</div>
 	);

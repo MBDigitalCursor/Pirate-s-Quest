@@ -1,0 +1,44 @@
+.main-page {
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2FE2w2TzO.jpg&f=1&nofb=1&ipt=d200b89478150f6f5139881f30ecf182e9a2e5327c35877ce5ab007065806589&ipo=images');
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: calc(100vh - 10rem);
+}
+
+
+.scale-out-top {
+  animation: scale-out-top 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+@keyframes scale-out-top {
+  0% {
+    transform: scale(1.2);
+    transform-origin: 50% 0%;
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0);
+    transform-origin: 50% 0%;
+    opacity: 1;
+  }
+}
+
+.scale-out-bottom {
+  animation: scale-out-bottom 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+@keyframes scale-out-bottom {
+  0% {
+    transform: scale(1.2);
+    transform-origin: 50% 100%;
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0);
+    transform-origin: 50% 100%;
+    opacity: 1;
+  }
+}

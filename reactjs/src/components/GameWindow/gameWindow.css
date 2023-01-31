@@ -2,7 +2,12 @@
   max-width: 20rem;
   max-height: 18rem;
   cursor: pointer;
+  border-radius: 30%;
+  background-color: rgba(206, 206, 206, 0.321);
+}
 
+.d-hidden {
+  display: none;
 }
 
 .clickable-object:hover {

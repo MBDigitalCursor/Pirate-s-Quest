@@ -13,7 +13,7 @@ function Leadersboard() {
 				boxShadow: "3px 3px 10px 1px #3b3939ad",
 				borderRadius: "4px",
 				right: "5%",
-				top: "15%",
+				top: "10rem",
 			}}
 		>
 			Leadersboard

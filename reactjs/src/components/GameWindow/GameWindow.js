@@ -4,7 +4,7 @@ import "../GameWindow/gameWindow.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setMousePos } from "../../store/appStore";
 
-function GameWindow() {
+function GameWindow({ setShowDrop, showDrop }) {
 	const [shakeTo, setShakeTo] = useState("left");
 
 	const { mousePos } = useSelector((state) => state.appStore);
@@ -12,7 +12,6 @@ function GameWindow() {
 	const dispatch = useDispatch();
 
 	const handleClick = (e) => {
-		console.log("e ===", e.target);
 		if (!e.target) dispatch(setMousePos({}));
 		const handleMouseMove = (event) => {
 			dispatch(setMousePos({ x: event.clientX, y: event.clientY }));
@@ -20,17 +19,15 @@ function GameWindow() {
 		e.target.addEventListener("click", handleMouseMove);
 	};
 
-	// useEffect(() => {
-	// 	const handleMouseMove = (event) => {
-	// 		dispatch(setMousePos({ x: event.clientX, y: event.clientY }));
-	// 	};
-	// 	window.addEventListener("click", handleMouseMove);
-	// 	return () => {
-	// 		window.removeEventListener("click", handleMouseMove);
-	// 	};
-	// }, [mousePos]);
+	const handleTimeout = () => {
+		if (showDrop) {
+			const timer = setTimeout(() => setShowDrop(false), 100);
+			return () => clearTimeout(timer);
+		}
+	};
 
 	const handleShake = () => {
+		setShowDrop(true);
 		if (shakeTo === "left") setShakeTo("right");
 		if (shakeTo === "right") setShakeTo("left");
 	};
@@ -72,6 +69,7 @@ function GameWindow() {
 			{shakeTo === "left" ? (
 				<img
 					onClick={(e) => {
+						handleTimeout();
 						handleShake();
 						handleClick(e);
 					}}

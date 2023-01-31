@@ -11,8 +11,8 @@ function UpgradesWindow() {
 				borderRadius: "4px",
 				width: "18rem",
 				position: "absolute",
-				top: "5rem",
-				left: "11.5rem",
+				top: "10rem",
+				left: "10rem",
 			}}
 		>
 			UpgradesWindow

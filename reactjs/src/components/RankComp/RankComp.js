@@ -11,7 +11,7 @@ function RankComp() {
 				flexDirection: "column",
 				alignItems: "center",
 				position: "absolute",
-				top: "20px",
+				top: "3rem",
 			}}
 		>
 			<p>RANK</p>
