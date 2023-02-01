@@ -123,17 +123,26 @@ module.exports = (io) => {
 
 		socket.on("upgrade", async (data) => {
 			const { userId, upgrade } = data;
+
 			const user = await UserSchema.findOne({ id: userId });
+
 			if (user) {
 				const foundUpgIndex = user.upgrades.findIndex((upg) => upg.upgradeTitle === upgrade);
 				const upgradeToUpdate = user.upgrades[foundUpgIndex];
 				const oldCost = upgradeToUpdate.upgradeCost;
 				if (user.gold < oldCost) {
+					// TODO Fronte prideti klaidos atvaizdavima
 					socket.emit("goldError", "Not enought gold for upgrade");
 					return;
 				}
+				// TODO Prideti kainos apvalinima Math.
+				if (upgradeToUpdate.level >= upgradeToUpdate.maxLevel) {
+					// TODO Fronte prideti klaidos atvaizdavima
+					socket.emit("maxLevel", "You reach max level of this upgrade");
+					return;
+				}
 				upgradeToUpdate.level += 1;
-				upgradeToUpdate.upgradeCost = upgradeToUpdate.upgradeCost * 1.2;
+				upgradeToUpdate.upgradeCost = upgradeToUpdate.upgradeCost * upgradeToUpdate.costMultiplier;
 				await UserSchema.findOneAndUpdate(
 					{ id: userId },
 					{

@@ -3,60 +3,70 @@
 		"upg": "dropPerClickLevel",
 		"title": "Increase drop amount per click",
 		"img": "https://cdn-icons-png.flaticon.com/512/287/287604.png",
-		"desc": "Every level increase gold drop by 0.1"
+		"desc": "Every level increase gold drop by 0.1",
+		"costCalc": "prevCost * 1.2"
 	},
 	{
 		"upg": "critStrikeChanceLevel",
 		"title": "Increase critical strike chance",
 		"img": "https://cdn-icons-png.flaticon.com/512/3818/3818226.png",
-		"desc": "Increase your critical chance by 0.2% per level"
+		"desc": "Increase your critical chance by 0.2% per level",
+		"costCalc": "prevCost * 1.2"
 	},
 	{
 		"upg": "critStrikeMultiplierLevel",
 		"title": "Increase critical strike multiplier",
 		"img": "https://cdn-icons-png.flaticon.com/512/35/35795.png",
-		"desc": "Increase critical strike multiplier by 0.2 per level"
+		"desc": "Increase critical strike multiplier by 0.2 per level",
+		"costCalc": "prevCost * 1.4"
 	},
 	{
 		"upg": "autoIncomeAmountLevel",
 		"title": "Increase auto income amount per sec",
 		"img": "https://cdn-icons-png.flaticon.com/512/8366/8366563.png",
-		"desc": "Increase gold amount per second by 0.5"
+		"desc": "Increase gold amount per second by 0.5",
+		"costCalc": "prevCost * 1.2"
 	},
 	{
 		"upg": "autoIncomeTimeLevel",
 		"title": "Decrease auto income time",
 		"img": "https://cdn-icons-png.flaticon.com/512/1792/1792839.png",
-		"desc": "Decrease auto income time by 0.5s per level"
+		"desc": "Decrease auto income time by 0.5s per level",
+		"costCalc": "prevCost * 2"
 	},
 	{
 		"upg": "doubleDropChanceLevel",
 		"title": "Increase double drop chance",
 		"img": "https://cdn-icons-png.flaticon.com/512/9217/9217021.png",
-		"desc": "Increase double drop chance by 0.2% per level"
+		"desc": "Increase double drop chance by 0.2% per level",
+		"costCalc": "prevCost * 1.4"
 	},
 	{
 		"upg": "tripleDropChanceLevel",
 		"title": "Increase triple drop chance",
 		"img": "https://cdn-icons-png.flaticon.com/512/3072/3072686.png",
-		"desc": "Increase triple drop chance by 0.1% per level"
+		"desc": "Increase triple drop chance by 0.1% per level",
+		"costCalc": "prevCost * 1.4"
 	},
 	{
 		"upg": "commonDropChanceLevel",
 		"title": "Increase common drop chance",
 		"img": "https://cdn-icons-png.flaticon.com/512/2140/2140085.png",
-		"desc": "Increase common drop rate by 0.3% per level"
+		"desc": "Increase common drop rate by 0.2% per level",
+		"costCalc": "prevCost * 1.2"
 	},
 	{
 		"upg": "rareDropChanceLevel",
 		"title": "Increase rare drop chance",
 		"img": "https://cdn-icons-png.flaticon.com/512/2140/2140085.png",
-		"desc": "Increase rare drop rate by 0.2% per level"
+		"desc": "Increase rare drop rate by 0.2% per level",
+		"costCalc": "prevCost * 1.2"
 	},
 	{
 		"upg": "epicDropChanceLevel",
 		"title": "Increase epic drop chance",
 		"img": "https://cdn-icons-png.flaticon.com/512/2140/2140085.png",
-		"desc": "Increase epic drop rate by 0.1% per level"
+		"desc": "Increase epic drop rate by 0.1% per level",
+		"costCalc": "prevCost * 1.2"
 	}
 ]
