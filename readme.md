@@ -1,7 +1,9 @@
 
-# Rocky Planets: Clicker Game
+# Pirate's Quest: An Epic Clicker Adventure
 
-Repeatedly click to earn gold until you have enough money to purchase the first upgrade. From there, you continue adding upgrades until you can move to conquer another planet!
+Embark on a journey as a stranded pirate on a deserted beach. With nothing but your trusty shovel, dig for hidden treasures buried deep in the sand. Use the gold you find to purchase upgrades and build a sturdy raft to set sail for the next island.
+As you explore new lands, you'll encounter even greater riches and opportunities to improve your vessel. Upgrade your equipment, recruit a loyal crew, and upgrade your ship until you command a mighty pirate ship capable of braving the high seas.
+Join the pirate's life and follow the quest for ultimate wealth and glory in Pirate's Quest: An Epic Clicker Adventure.
 
 
 ## Authors
