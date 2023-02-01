@@ -10,8 +10,9 @@ function UpgradesWindow() {
 	const upgrade = (upgrade) => {
 		const data = {
 			userId: logged.id,
-			upgrade: 
+			upgrade,
 		};
+		socket.emit("upgrade", data);
 	};
 
 	return (
@@ -26,7 +27,7 @@ function UpgradesWindow() {
 				backdropFilter: "blur(4px)",
 			}}
 		>
-			<h1>Upgrades</h1>
+			<h1 onClick={() => upgrade("dropPerClickLevel")}>Upgrades</h1>
 		</div>
 	);
 }

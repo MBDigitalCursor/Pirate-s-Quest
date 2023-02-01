@@ -65,12 +65,13 @@ module.exports = (io) => {
 		socket.on("addGold", async (id) => {
 			const foundUser = await UserSchema.findOne({ id });
 			const newRank = updateRank(foundUser.rank.exp);
+
 			if (foundUser) {
 				await UserSchema.findOneAndUpdate(
 					{ id },
 					{
 						$inc: {
-							gold: 1 + foundUser.upgrades.dropPerClickLevel / 10,
+							gold: 1 + foundUser.upgrades[0].level / 10,
 							"rank.exp": 1,
 						},
 						$set: {
@@ -104,6 +105,23 @@ module.exports = (io) => {
 				socket.emit("checkedUser", user);
 			} else {
 				socket.emit("checkedUser", null);
+			}
+		});
+		socket.on("upgrade", async (data) => {
+			const { userId, upgrade } = data;
+			const user = await UserSchema.findOne({ id: userId });
+			// console.log("user ===", user);
+			if (user) {
+				await UserSchema.findOneAndUpdate(
+					{ id: userId },
+					{
+						$inc: {
+							["upgrades." + upgrade]: 1,
+						},
+					}
+				);
+				const updatedUser = await UserSchema.findOne({ id: userId });
+				console.log("updatedUser ===", updatedUser);
 			}
 		});
 	});
