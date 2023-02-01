@@ -13,16 +13,11 @@ function RankComp() {
 
 	useEffect(() => {
 		const checkProgress = () => {
-			console.log("logged ===", logged);
-			const currentRankTitle = logged.rank.rank;
-			const currentRankExp = logged.rank.exp;
-			let lastRank = "";
-			ranks.map((rank) => {
-				const el = rank.exp > currentRankExp;
-				console.log("rank.exp ===", rank);
-				return (lastRank = rank.exp);
-			});
-			console.log("lastRank ===", lastRank);
+			const currentUserRank = logged.rank;
+			const currentRankIndex = ranks.findIndex((rank) => rank.exp <= currentUserRank.exp);
+			const nextRank = ranks[currentRankIndex + 1];
+			const progressPercent = (currentUserRank.exp * 100) / nextRank.exp;
+			dispatch(setProgress(progressPercent));
 		};
 
 		checkProgress();
@@ -71,7 +66,7 @@ function RankComp() {
 						}}
 					>
 						<LinearProgress
-							variant="determinate"
+							variant='determinate'
 							value={progress}
 							sx={{
 								height: "10px",

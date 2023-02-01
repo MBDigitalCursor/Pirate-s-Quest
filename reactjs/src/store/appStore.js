@@ -13,8 +13,12 @@ export const appStore = createSlice({
 		showDrop: false,
 		ranks: [
 			{
+				title: "Newbie",
+				exp: 0,
+			},
+			{
 				title: "Cooper",
-				exp: 350,
+				exp: 1000,
 			},
 			{
 				title: "Striker",
