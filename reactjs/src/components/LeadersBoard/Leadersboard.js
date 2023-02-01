@@ -1,7 +1,10 @@
 import { Box } from "@mui/material";
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import MainContext from "../../context/MainContext";
 
 function Leadersboard() {
+	const { socket } = useContext(MainContext);
+
 	return (
 		<Box
 			sx={{

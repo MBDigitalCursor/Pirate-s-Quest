@@ -5,7 +5,6 @@ const UserSchema = require("../schemas/UserSchema");
 
 module.exports = {
 	register: async (req, res) => {
-		console.log(req.body);
 		const { nick, passOne, passTwo } = req.body;
 		const id = await uid(5);
 		if (nick.lenght <= 3) return res.send({ error: true, message: "Nickname should be at least 3 symbols" });

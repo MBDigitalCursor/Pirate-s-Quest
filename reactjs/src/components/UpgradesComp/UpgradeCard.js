@@ -106,9 +106,6 @@ function UpgradeCard({ singleUpg, idx }) {
 							<p>
 								Current upgrade level: <b>{singleUpg.level}</b>{" "}
 							</p>
-							<p>
-								Next available upgrade level: <b>{singleUpg.level + 1}</b>{" "}
-							</p>
 						</Box>
 					</Popper>
 				</Box>

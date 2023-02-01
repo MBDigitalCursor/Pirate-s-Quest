@@ -21,7 +21,7 @@ function UpgradesWindow() {
 				backdropFilter: "blur(4px)",
 			}}
 		>
-			<h1>Upgrades</h1>
+			<h2>Upgrades</h2>
 
 			<Box
 				sx={{

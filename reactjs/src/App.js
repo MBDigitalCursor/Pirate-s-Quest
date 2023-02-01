@@ -28,13 +28,19 @@ function App() {
 
 	useEffect(() => {
 		socket.emit("checkUser", localStorage.getItem("user_id"));
-		console.log("User data sended to server");
 	}, [socket]);
 
 	useEffect(() => {
 		socket.on("checkedUser", (user) => {
-			console.log("User data received ==>", user);
 			dispatch(setLogged(user));
+		});
+	}, [socket]);
+
+	useEffect(() => {
+		socket.emit("getAllUsers");
+
+		socket.on("getAllUsers", (users) => {
+			console.log("getAllUsers ==>", users);
 		});
 	}, [socket]);
 
@@ -49,11 +55,11 @@ function App() {
 				<BrowserRouter>
 					<Routes>
 						<Route
-							path='/'
+							path="/"
 							element={<LoginRegPage />}
 						/>
 						<Route
-							path='/main'
+							path="/main"
 							element={<Main></Main>}
 						></Route>
 					</Routes>

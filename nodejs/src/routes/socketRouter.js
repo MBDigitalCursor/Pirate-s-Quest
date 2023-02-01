@@ -1,5 +1,8 @@
 const UserSchema = require("../schemas/UserSchema");
 
+var db = require("mongodb").MongoClient;
+var url = "localhost:5000";
+
 const ranks = [
 	{
 		title: "Newbie",
@@ -111,6 +114,13 @@ module.exports = (io) => {
 				socket.emit("checkedUser", null);
 			}
 		});
+
+		socket.on("getAllUsers", async () => {
+			const allUsers = await UserSchema.find();
+			console.log("allusers ===", allUsers);
+			socket.emit("getAllUsers", allUsers);
+		});
+
 		socket.on("upgrade", async (data) => {
 			const { userId, upgrade } = data;
 			const user = await UserSchema.findOne({ id: userId });

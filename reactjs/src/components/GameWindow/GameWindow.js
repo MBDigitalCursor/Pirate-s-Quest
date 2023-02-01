@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import "../GameWindow/gameWindow.css";
 import { useSelector } from "react-redux";
 import { setLogged, setMousePos, setProgress, setShowDrop, setShowUpgrades } from "../../store/appStore";
-import axios from "axios";
 import MainContext from "../../context/MainContext";
 
 function GameWindow() {
@@ -11,7 +10,7 @@ function GameWindow() {
 
 	const [shakeTo, setShakeTo] = useState("left");
 
-	const { logged, url, progress, showDrop, showUpgrades } = useSelector((state) => state.appStore);
+	const { logged, showDrop, showUpgrades } = useSelector((state) => state.appStore);
 
 	const addGold = () => {
 		socket.emit("addGold", logged.id);

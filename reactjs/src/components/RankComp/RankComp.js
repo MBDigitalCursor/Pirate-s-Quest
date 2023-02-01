@@ -12,16 +12,14 @@ function RankComp() {
 	const { logged, progress, ranks } = useSelector((state) => state.appStore);
 
 	useEffect(() => {
-		const checkProgress = () => {
+		if (logged) {
 			const currentUserRank = logged.rank;
 			const currentRankIndex = ranks.findIndex((rank) => rank.exp <= currentUserRank.exp);
 			const nextRank = ranks[currentRankIndex + 1];
 			const progressPercent = (currentUserRank.exp * 100) / nextRank.exp;
 			dispatch(setProgress(progressPercent));
-		};
-
-		checkProgress();
-	}, [socket, logged]);
+		}
+	}, [socket, logged, dispatch, ranks]);
 
 	return (
 		<div
@@ -66,7 +64,7 @@ function RankComp() {
 						}}
 					>
 						<LinearProgress
-							variant='determinate'
+							variant="determinate"
 							value={progress}
 							sx={{
 								height: "10px",
