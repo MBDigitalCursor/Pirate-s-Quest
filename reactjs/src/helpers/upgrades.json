@@ -1,37 +1,51 @@
 [
 	{
+		"upg": "dropPerClickLevel",
 		"title": "Increase drop amount per click",
 		"img": ""
 	},
 	{
+		"upg": "critStrikeChanceLevel",
 		"title": "Increase critical strike chance",
 		"img": ""
 	},
 	{
+		"upg": "critStrikeMultiplierLevel",
 		"title": "Increase critical strike multiplier",
 		"img": ""
 	},
 	{
+		"upg": "autoIncomeQuantityLevel",
 		"title": "Increase auto income amount per sec",
 		"img": ""
 	},
 	{
+		"upg": "autoIncomeTimeLevel",
 		"title": "Decrease auto income time",
 		"img": ""
 	},
 	{
+		"upg": "doubleDropChanceLevel",
 		"title": "Increase double drop chance",
 		"img": ""
 	},
 	{
+		"upg": "tripleDropChanceLevel",
+		"title": "Increase triple drop chance",
+		"img": ""
+	},
+	{
+		"upg": "commonDropChanceLevel",
 		"title": "Increase common drop chance",
 		"img": ""
 	},
 	{
+		"upg": "rareDropChanceLevel",
 		"title": "Increase rare drop chance",
 		"img": ""
 	},
 	{
+		"upg": "epicDropChanceLevel",
 		"title": "Increase epic drop chance",
 		"img": ""
 	}
