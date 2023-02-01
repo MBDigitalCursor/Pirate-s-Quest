@@ -110,18 +110,27 @@ module.exports = (io) => {
 		socket.on("upgrade", async (data) => {
 			const { userId, upgrade } = data;
 			const user = await UserSchema.findOne({ id: userId });
-			// console.log("user ===", user);
 			if (user) {
+				const foundUpgIndex = user.upgrades.findIndex((upg) => upg.upgradeTitle === upgrade);
+				const upgradeToUpdate = user.upgrades[foundUpgIndex];
+				const oldCost = upgradeToUpdate.upgradeCost;
+				if (user.gold < oldCost) {
+					socket.emit("goldError", "Not enought gold for upgrade");
+					return;
+				}
+				upgradeToUpdate.level += 1;
+				upgradeToUpdate.upgradeCost = upgradeToUpdate.upgradeCost * 1.2;
 				await UserSchema.findOneAndUpdate(
 					{ id: userId },
 					{
-						$inc: {
-							["upgrades." + upgrade]: 1,
+						$set: {
+							gold: user.gold - oldCost,
+							upgrades: user.upgrades,
 						},
 					}
 				);
 				const updatedUser = await UserSchema.findOne({ id: userId });
-				console.log("updatedUser ===", updatedUser);
+				socket.emit("updatedUser", updatedUser);
 			}
 		});
 	});
