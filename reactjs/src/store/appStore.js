@@ -8,6 +8,7 @@ export const appStore = createSlice({
 		loginError: "",
 		url: "http://localhost:5000",
 		newUser: false,
+		showUpgrades: false,
 		progress: 0,
 		showDrop: false,
 		ranks: [
@@ -57,9 +58,12 @@ export const appStore = createSlice({
 		setShowDrop: (state, action) => {
 			state.showDrop = action.payload;
 		},
+		setShowUpgrades: (state, action) => {
+			state.showUpgrades = action.payload;
+		},
 	},
 });
 
-export const { setLogged, setMousePos, setLoginError, setNewUser, setProgress, setShowDrop } = appStore.actions;
+export const { setLogged, setMousePos, setLoginError, setNewUser, setProgress, setShowDrop, setShowUpgrades } = appStore.actions;
 
 export default appStore.reducer;

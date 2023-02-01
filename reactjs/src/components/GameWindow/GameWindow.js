@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import "../GameWindow/gameWindow.css";
 import { useSelector } from "react-redux";
-import { setLogged, setMousePos, setProgress, setShowDrop } from "../../store/appStore";
+import { setLogged, setMousePos, setProgress, setShowDrop, setShowUpgrades } from "../../store/appStore";
 import axios from "axios";
 import MainContext from "../../context/MainContext";
 
@@ -11,7 +11,7 @@ function GameWindow() {
 
 	const [shakeTo, setShakeTo] = useState("left");
 
-	const { logged, url, progress, showDrop } = useSelector((state) => state.appStore);
+	const { logged, url, progress, showDrop, showUpgrades } = useSelector((state) => state.appStore);
 
 	const addGold = () => {
 		socket.emit("addGold", logged.id);
@@ -73,8 +73,9 @@ function GameWindow() {
 			</p>
 
 			<Button
-				color='gold'
-				variant='contained'
+				color="gold"
+				variant="contained"
+				onClick={() => dispatch(setShowUpgrades(!showUpgrades))}
 				sx={{
 					marginRight: "0.3rem",
 					position: "absolute",
@@ -93,9 +94,9 @@ function GameWindow() {
 						handleClick(e);
 						addGold();
 					}}
-					className='clickable-object shake-left'
-					src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images'
-					alt=''
+					className="clickable-object shake-left"
+					src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images"
+					alt=""
 				/>
 			) : (
 				<img
@@ -105,9 +106,9 @@ function GameWindow() {
 						handleClick(e);
 						addGold();
 					}}
-					className='clickable-object shake-right'
-					src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images'
-					alt=''
+					className="clickable-object shake-right"
+					src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images"
+					alt=""
 				/>
 			)}
 		</Box>

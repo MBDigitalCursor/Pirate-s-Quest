@@ -71,7 +71,7 @@ function RankComp() {
 						}}
 					>
 						<LinearProgress
-							variant='determinate'
+							variant="determinate"
 							value={progress}
 							sx={{
 								height: "10px",

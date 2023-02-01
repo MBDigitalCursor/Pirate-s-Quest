@@ -10,13 +10,13 @@ import MainContext from "../../context/MainContext";
 import "../MainPage/mainPage.css";
 
 function Main() {
-	const { mousePos, logged, showDrop } = useSelector((state) => state.appStore);
+	const { mousePos, logged, showDrop, showUpgrades } = useSelector((state) => state.appStore);
 
 	const { dispatch, socket } = useContext(MainContext);
 
 	return (
 		<div
-			className='main-page text-focus-in'
+			className="main-page text-focus-in"
 			style={{
 				position: "relative",
 				display: "flex",
@@ -56,15 +56,15 @@ function Main() {
 				</p>
 			)}
 			<Stack
-				direction='row'
+				direction="row"
 				spacing={6}
 			>
-				<UpgradesWindow></UpgradesWindow>
-				<GameWindow></GameWindow>
-				<Leadersboard></Leadersboard>
+				{showUpgrades && <UpgradesWindow />}
+				<GameWindow />
+				<Leadersboard />
 			</Stack>
-			<RankComp></RankComp>
-			<Profile></Profile>
+			<RankComp />
+			<Profile />
 		</div>
 	);
 }
