@@ -7,7 +7,25 @@ import { setProgress } from "../../store/appStore.js";
 function RankComp() {
 	const { socket, dispatch } = useContext(MainContext);
 
-	const { logged, progress } = useSelector((state) => state.appStore);
+	// console.log("3243 * 100 / 5000", (3243 * 100) / 5000);
+
+	const { logged, progress, ranks } = useSelector((state) => state.appStore);
+
+	useEffect(() => {
+		const checkProgress = () => {
+			console.log("logged ===", logged);
+			const currentRankTitle = logged.rank.rank;
+			const currentRankExp = logged.rank.exp;
+			const nextRankIndex = ranks.map((rank) => {
+				if (rank.exp > currentRankExp) {
+				}
+			});
+			console.log("nextRankIndex ===", nextRankIndex);
+		};
+
+		checkProgress();
+	}, [socket, logged]);
+
 	return (
 		<div
 			style={{
@@ -51,7 +69,7 @@ function RankComp() {
 						}}
 					>
 						<LinearProgress
-							variant="determinate"
+							variant='determinate'
 							value={progress}
 							sx={{
 								height: "10px",
