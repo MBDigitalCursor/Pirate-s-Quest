@@ -21,8 +21,10 @@ module.exports = {
 					pass: hashedPass,
 				});
 				await newUser.save();
-				res.send({ error: false, message: "User Created" });
+				return res.send({ error: false, message: "User Created" });
 			}
+		} else {
+			return res.send({ error: true, message: "User already exists" });
 		}
 	},
 	login: async (req, res) => {
