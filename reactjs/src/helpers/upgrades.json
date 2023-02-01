@@ -2,51 +2,51 @@
 	{
 		"upg": "dropPerClickLevel",
 		"title": "Increase drop amount per click",
-		"img": ""
+		"img": "https://cdn-icons-png.flaticon.com/512/290/290938.png"
 	},
 	{
 		"upg": "critStrikeChanceLevel",
 		"title": "Increase critical strike chance",
-		"img": ""
+		"img": "https://cdn-icons-png.flaticon.com/512/3818/3818226.png"
 	},
 	{
 		"upg": "critStrikeMultiplierLevel",
 		"title": "Increase critical strike multiplier",
-		"img": ""
+		"img": "https://cdn-icons-png.flaticon.com/512/35/35795.png"
 	},
 	{
 		"upg": "autoIncomeQuantityLevel",
 		"title": "Increase auto income amount per sec",
-		"img": ""
+		"img": "https://cdn-icons-png.flaticon.com/512/8366/8366563.png"
 	},
 	{
 		"upg": "autoIncomeTimeLevel",
 		"title": "Decrease auto income time",
-		"img": ""
+		"img": "https://cdn-icons-png.flaticon.com/512/1792/1792839.png"
 	},
 	{
 		"upg": "doubleDropChanceLevel",
 		"title": "Increase double drop chance",
-		"img": ""
+		"img": "https://cdn-icons-png.flaticon.com/512/9217/9217021.png"
 	},
 	{
 		"upg": "tripleDropChanceLevel",
 		"title": "Increase triple drop chance",
-		"img": ""
+		"img": "https://cdn-icons-png.flaticon.com/512/3072/3072686.png"
 	},
 	{
 		"upg": "commonDropChanceLevel",
 		"title": "Increase common drop chance",
-		"img": ""
+		"img": "https://cdn-icons-png.flaticon.com/512/7417/7417034.png"
 	},
 	{
 		"upg": "rareDropChanceLevel",
 		"title": "Increase rare drop chance",
-		"img": ""
+		"img": "https://cdn-icons-png.flaticon.com/512/7417/7417034.png"
 	},
 	{
 		"upg": "epicDropChanceLevel",
 		"title": "Increase epic drop chance",
-		"img": ""
+		"img": "https://cdn-icons-png.flaticon.com/512/7417/7417034.png"
 	}
 ]

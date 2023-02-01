@@ -1,3 +1,5 @@
+import { Button, Popover, Popper, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import MainContext from "../../context/MainContext";
@@ -7,12 +9,14 @@ function UpgradesWindow() {
 
 	const { logged } = useSelector((state) => state.appStore);
 
-	const upgrade = (upgrade) => {
-		const data = {
-			userId: logged.id,
-			upgrade: 
-		};
+	const [anchorEl, setAnchorEl] = React.useState(null);
+
+	const handleClick = (event) => {
+		setAnchorEl(anchorEl ? null : event.currentTarget);
 	};
+
+	const open = Boolean(anchorEl);
+	const id = open ? "simple-popper" : undefined;
 
 	return (
 		<div
@@ -26,7 +30,23 @@ function UpgradesWindow() {
 				backdropFilter: "blur(4px)",
 			}}
 		>
-			<h1>Upgrades</h1>
+			<div>
+				<button
+					aria-describedby={id}
+					type="button"
+					onMouseEnter={handleClick}
+					onMouseLeave={() => setAnchorEl(false)}
+				>
+					Toggle Popper
+				</button>
+				<Popper
+					id={id}
+					open={open}
+					anchorEl={anchorEl}
+				>
+					<Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>The content of the Popper.</Box>
+				</Popper>
+			</div>
 		</div>
 	);
 }
