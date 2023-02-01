@@ -13,14 +13,12 @@ function RankComp() {
 
 	useEffect(() => {
 		const checkProgress = () => {
-			console.log("logged ===", logged);
 			const currentRankTitle = logged.rank.rank;
 			const currentRankExp = logged.rank.exp;
 			const nextRankIndex = ranks.map((rank) => {
 				if (rank.exp > currentRankExp) {
 				}
 			});
-			console.log("nextRankIndex ===", nextRankIndex);
 		};
 
 		checkProgress();
@@ -69,7 +67,7 @@ function RankComp() {
 						}}
 					>
 						<LinearProgress
-							variant='determinate'
+							variant="determinate"
 							value={progress}
 							sx={{
 								height: "10px",

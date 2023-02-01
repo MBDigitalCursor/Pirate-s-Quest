@@ -9,7 +9,6 @@ import "./upgradeCard.css";
 
 function UpgradeCard({ singleUpg, idx }) {
 	const { dispatch, socket } = useContext(MainContext);
-	console.log("singleUpg ===", singleUpg);
 	const { logged } = useSelector((state) => state.appStore);
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -66,6 +65,7 @@ function UpgradeCard({ singleUpg, idx }) {
 					<Button
 						color="gold"
 						variant="contained"
+						onClick={() => upgrade(upgradeData[idx].upg)}
 						sx={{
 							fontSize: "0.8rem",
 							fontWeight: "bold",
@@ -101,7 +101,15 @@ function UpgradeCard({ singleUpg, idx }) {
 						open={open}
 						anchorEl={anchorEl}
 					>
-						<Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>{upgradeData[idx].desc}</Box>
+						<Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
+							<p>{upgradeData[idx].desc}</p>
+							<p>
+								Current upgrade level: <b>{singleUpg.level}</b>{" "}
+							</p>
+							<p>
+								Next available upgrade level: <b>{singleUpg.level + 1}</b>{" "}
+							</p>
+						</Box>
 					</Popper>
 				</Box>
 			</Stack>
