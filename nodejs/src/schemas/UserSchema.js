@@ -101,7 +101,7 @@ const UserSchema = new Schema({
 		required: false,
 		default: {
 			rank: "Newbie",
-			exp: 0,
+			exp: 990,
 		},
 	},
 	profileImage: {

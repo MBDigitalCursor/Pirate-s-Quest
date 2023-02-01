@@ -13,6 +13,7 @@ function RankComp() {
 
 	useEffect(() => {
 		if (logged) {
+			// TODO NEVEIKIA
 			const currentUserRank = logged.rank;
 			const currentRankIndex = ranks.findIndex((rank) => rank.exp <= currentUserRank.exp);
 			const nextRank = ranks[currentRankIndex + 1];

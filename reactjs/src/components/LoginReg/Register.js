@@ -18,34 +18,35 @@ function Register() {
 	const repeatPassRef = useRef();
 
 	const handleRegister = async () => {
-		const newUser = {
+		const newUserObj = {
 			nick: nickRef.current.value,
 			passOne: passRef.current.value,
 			passTwo: repeatPassRef.current.value,
 		};
 
-		if (newUser.nick === "" && newUser.passOne === "" && newUser.passTwo === "") {
+		if (newUserObj.nick === "" && newUserObj.passOne === "" && newUserObj.passTwo === "") {
 			dispatch(setLoginError("Please fill all the fields"));
 			return;
 		}
 
 		// If registration succsesfuly, then show modal with response // TODO
 
-		axios.post(`${url}/register`, newUser).then((response) => {
+		axios.post(`${url}/register`, newUserObj).then((response) => {
 			if (response.data.error) {
 				console.log(response.data.message);
 				dispatch(setLoginError(response.data.message));
 			} else {
-				dispatch(setNewUser(true));
+				console.log(response.data.message);
+				dispatch(setNewUser(!newUser));
 			}
 		});
 	};
 
 	return (
-		<div className="register">
+		<div className='register'>
 			<Container
-				component="main"
-				maxWidth="xs"
+				component='main'
+				maxWidth='xs'
 			>
 				<Box
 					className={loginError ? "slide-top" : ""}
@@ -64,18 +65,18 @@ function Register() {
 					>
 						{loginError ? (
 							<BsFillPersonXFill
-								className="login-icon-error flip-2-hor-top-1 "
-								fontSize="2rem"
+								className='login-icon-error flip-2-hor-top-1 '
+								fontSize='2rem'
 							/>
 						) : (
 							<BsFillPersonCheckFill
-								className="login-icon"
-								fontSize="2rem"
+								className='login-icon'
+								fontSize='2rem'
 							/>
 						)}
 						<Typography
-							component="h1"
-							variant="h5"
+							component='h1'
+							variant='h5'
 							sx={{
 								marginTop: "1rem",
 								color: "#000",
@@ -88,30 +89,30 @@ function Register() {
 						<Box>
 							<TextField
 								inputRef={nickRef}
-								margin="normal"
+								margin='normal'
 								required
 								fullWidth
-								label="Nickname"
+								label='Nickname'
 								autoFocus
 							/>
 							<TextField
 								inputRef={passRef}
-								margin="normal"
-								color="primary"
+								margin='normal'
+								color='primary'
 								required
 								fullWidth
-								label="Password"
-								type="password"
-								autoComplete="current-password"
+								label='Password'
+								type='password'
+								autoComplete='current-password'
 							/>
 							<TextField
 								inputRef={repeatPassRef}
-								margin="normal"
+								margin='normal'
 								required
 								fullWidth
-								label="Repeat password"
-								type="password"
-								autoComplete="current-password"
+								label='Repeat password'
+								type='password'
+								autoComplete='current-password'
 							/>
 						</Box>
 					) : (
@@ -120,9 +121,9 @@ function Register() {
 								inputRef={nickRef}
 								error
 								fullWidth
-								id="outlined-error-helper-text"
-								label="Error"
-								color="primary"
+								id='outlined-error-helper-text'
+								label='Error'
+								color='primary'
 								helperText={loginError}
 								sx={{
 									marginTop: "0.55rem",
@@ -131,21 +132,21 @@ function Register() {
 							/>
 							<TextField
 								inputRef={passRef}
-								margin="normal"
+								margin='normal'
 								required
 								fullWidth
-								label="Password"
-								type="password"
-								autoComplete="current-password"
+								label='Password'
+								type='password'
+								autoComplete='current-password'
 							/>
 							<TextField
 								inputRef={repeatPassRef}
-								margin="normal"
+								margin='normal'
 								required
 								fullWidth
-								label="Repeat password"
-								type="password"
-								autoComplete="current-password"
+								label='Repeat password'
+								type='password'
+								autoComplete='current-password'
 							/>
 						</Box>
 					)}
@@ -155,8 +156,8 @@ function Register() {
 						<Button
 							onClick={handleRegister}
 							fullWidth
-							color="errorRed"
-							variant="contained"
+							color='errorRed'
+							variant='contained'
 							sx={{
 								mt: 3,
 								mb: 2,
@@ -172,8 +173,8 @@ function Register() {
 						<Button
 							onClick={handleRegister}
 							fullWidth
-							color="gold"
-							variant="contained"
+							color='gold'
+							variant='contained'
 							sx={{
 								mt: 3,
 								mb: 2,
