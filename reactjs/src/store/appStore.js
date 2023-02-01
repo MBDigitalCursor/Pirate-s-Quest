@@ -10,6 +10,32 @@ export const appStore = createSlice({
 		newUser: false,
 		progress: 0,
 		showDrop: false,
+		ranks: [
+			{
+				title: "Cooper",
+				exp: 350,
+			},
+			{
+				title: "Striker",
+				exp: 5000,
+			},
+			{
+				title: "Gunner",
+				exp: 12000,
+			},
+			{
+				title: "Navigator",
+				exp: 20000,
+			},
+			{
+				title: "Captain",
+				exp: 35000,
+			},
+			{
+				title: "Jack Sparrow",
+				exp: 50000,
+			},
+		],
 	},
 	reducers: {
 		setLogged: (state, action) => {
