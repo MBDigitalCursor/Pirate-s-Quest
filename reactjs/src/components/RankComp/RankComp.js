@@ -8,7 +8,6 @@ function RankComp() {
 	const { socket, dispatch } = useContext(MainContext);
 
 	const { logged, progress } = useSelector((state) => state.appStore);
-
 	return (
 		<div
 			style={{
@@ -52,7 +51,7 @@ function RankComp() {
 						}}
 					>
 						<LinearProgress
-							variant='determinate'
+							variant="determinate"
 							value={progress}
 							sx={{
 								height: "10px",
