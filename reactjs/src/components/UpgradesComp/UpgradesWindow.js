@@ -9,10 +9,11 @@ function UpgradesWindow() {
 
 	const { logged } = useSelector((state) => state.appStore);
 
-	const [anchorEl, setAnchorEl] = React.useState(null);
-
-	const handleClick = (event) => {
-		setAnchorEl(anchorEl ? null : event.currentTarget);
+	const upgrade = (upgrade) => {
+		const data = {
+			userId: logged.id,
+			upgrade: 
+		};
 	};
 
 	const open = Boolean(anchorEl);
@@ -30,23 +31,7 @@ function UpgradesWindow() {
 				backdropFilter: "blur(4px)",
 			}}
 		>
-			<div>
-				<button
-					aria-describedby={id}
-					type="button"
-					onMouseEnter={handleClick}
-					onMouseLeave={() => setAnchorEl(false)}
-				>
-					Toggle Popper
-				</button>
-				<Popper
-					id={id}
-					open={open}
-					anchorEl={anchorEl}
-				>
-					<Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>The content of the Popper.</Box>
-				</Popper>
-			</div>
+			<h1>Upgrades</h1>
 		</div>
 	);
 }

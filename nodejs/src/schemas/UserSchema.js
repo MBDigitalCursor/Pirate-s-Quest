@@ -21,20 +21,60 @@ const UserSchema = new Schema({
 		default: 100,
 	},
 	upgrades: {
-		type: Object,
+		type: Array,
 		required: false,
-		default: {
-			dropPerClickLevel: 1,
-			critStrikeMultiplierLevel: 1,
-			critStrikeChanceLevel: 1,
-			autoIncomeQuantityLevel: 0,
-			autoIncomeTimeLevel: 1,
-			doubleDropChanceLevel: 0,
-			tripleDropChanceLevel: 0,
-			commonDropChanceLevel: 0,
-			rareDropChanceLevel: 0,
-			epicDropChanceLevel: 0,
-		},
+		default: [
+			{
+				upgradeTitle: "dropPerClickLevel",
+				level: 1,
+				upgradeCost: 20,
+			},
+			{
+				upgradeTitle: "critStrikeMultiplierLevel",
+				level: 0,
+				upgradeCost: 50,
+			},
+			{
+				upgradeTitle: "critStrikeChanceLevel",
+				level: 0,
+				upgradeCost: 20,
+			},
+			{
+				upgradeTitle: "autoIncomeAmountLevel",
+				level: 0,
+				upgradeCost: 100,
+			},
+			{
+				upgradeTitle: "autoIncomeTimeLevel",
+				level: 0,
+				upgradeCost: 100,
+			},
+			{
+				upgradeTitle: "doubleDropChanceLevel",
+				level: 0,
+				upgradeCost: 50,
+			},
+			{
+				upgradeTitle: "tripleDropChanceLevel",
+				level: 0,
+				upgradeCost: 100,
+			},
+			{
+				upgradeTitle: "commonDropChanceLevel",
+				level: 0,
+				upgradeCost: 100,
+			},
+			{
+				upgradeTitle: "rareDropChanceLevel",
+				level: 0,
+				upgradeCost: 150,
+			},
+			{
+				upgradeTitle: "epicDropChanceLevel",
+				level: 0,
+				upgradeCost: 200,
+			},
+		],
 	},
 	rank: {
 		type: Object,
