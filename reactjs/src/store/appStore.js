@@ -9,6 +9,7 @@ export const appStore = createSlice({
 		url: "http://localhost:5000",
 		newUser: false,
 		progress: 0,
+		showDrop: false,
 	},
 	reducers: {
 		setLogged: (state, action) => {
@@ -27,9 +28,12 @@ export const appStore = createSlice({
 		setProgress: (state, action) => {
 			state.progress = action.payload;
 		},
+		setShowDrop: (state, action) => {
+			state.showDrop = action.payload;
+		},
 	},
 });
 
-export const { setLogged, setMousePos, setLoginError, setNewUser, setProgress } = appStore.actions;
+export const { setLogged, setMousePos, setLoginError, setNewUser, setProgress, setShowDrop } = appStore.actions;
 
 export default appStore.reducer;

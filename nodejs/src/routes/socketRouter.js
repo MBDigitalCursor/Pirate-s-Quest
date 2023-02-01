@@ -3,7 +3,7 @@ const UserSchema = require("../schemas/UserSchema");
 const ranks = [
 	{
 		title: "Cooper",
-		exp: 580,
+		exp: 1000,
 	},
 	{
 		title: "Striker",

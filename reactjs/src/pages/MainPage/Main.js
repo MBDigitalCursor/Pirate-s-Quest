@@ -62,10 +62,7 @@ function Main() {
 				spacing={6}
 			>
 				<UpgradesWindow></UpgradesWindow>
-				<GameWindow
-					setShowDrop={setShowDrop}
-					showDrop={showDrop}
-				></GameWindow>
+				<GameWindow></GameWindow>
 				<Leadersboard></Leadersboard>
 			</Stack>
 			<RankComp></RankComp>
