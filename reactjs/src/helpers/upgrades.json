@@ -2,7 +2,7 @@
 	{
 		"upg": "dropPerClickLevel",
 		"title": "Increase drop amount per click",
-		"img": "https://cdn-icons-png.flaticon.com/512/290/290938.png",
+		"img": "https://cdn-icons-png.flaticon.com/512/287/287604.png",
 		"desc": "Every level increase gold drop by 0.1"
 	},
 	{
@@ -44,19 +44,19 @@
 	{
 		"upg": "commonDropChanceLevel",
 		"title": "Increase common drop chance",
-		"img": "https://cdn-icons-png.flaticon.com/512/7417/7417034.png",
+		"img": "https://cdn-icons-png.flaticon.com/512/2140/2140085.png",
 		"desc": "Increase common drop rate by 0.3% per level"
 	},
 	{
 		"upg": "rareDropChanceLevel",
 		"title": "Increase rare drop chance",
-		"img": "https://cdn-icons-png.flaticon.com/512/7417/7417034.png",
+		"img": "https://cdn-icons-png.flaticon.com/512/2140/2140085.png",
 		"desc": "Increase rare drop rate by 0.2% per level"
 	},
 	{
 		"upg": "epicDropChanceLevel",
 		"title": "Increase epic drop chance",
-		"img": "https://cdn-icons-png.flaticon.com/512/7417/7417034.png",
+		"img": "https://cdn-icons-png.flaticon.com/512/2140/2140085.png",
 		"desc": "Increase epic drop rate by 0.1% per level"
 	}
 ]

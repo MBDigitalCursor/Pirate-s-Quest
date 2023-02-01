@@ -117,7 +117,7 @@ module.exports = (io) => {
 
 		socket.on("getAllUsers", async () => {
 			const allUsers = await UserSchema.find();
-			console.log("allusers ===", allUsers);
+
 			socket.emit("getAllUsers", allUsers);
 		});
 

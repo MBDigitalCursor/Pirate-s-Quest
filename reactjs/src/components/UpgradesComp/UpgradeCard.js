@@ -8,7 +8,7 @@ import upgradeData from "../../helpers/upgrades.json";
 import "./upgradeCard.css";
 
 function UpgradeCard({ singleUpg, idx }) {
-	const { dispatch, socket } = useContext(MainContext);
+	const { socket } = useContext(MainContext);
 	const { logged } = useSelector((state) => state.appStore);
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -25,11 +25,25 @@ function UpgradeCard({ singleUpg, idx }) {
 		socket.emit("upgrade", data);
 	};
 
+	const checkDropRarity = (id) => {
+		switch (id) {
+			case 7:
+				return "common-upgrade";
+			case 8:
+				return "rare-upgrade";
+			case 9:
+				return "epic-upgrade";
+			default:
+				return "upgrade-logo";
+		}
+	};
+
 	const open = Boolean(anchorEl);
 	const id = open ? "simple-popper" : undefined;
 
 	return (
 		<Box
+			className="single-upgrade-card"
 			sx={{
 				maxHeight: "35px",
 				border: "1px solid slategrey",
@@ -51,7 +65,7 @@ function UpgradeCard({ singleUpg, idx }) {
 					}}
 				>
 					<img
-						className="upgrade-logo"
+						className={checkDropRarity(idx)}
 						src={upgradeData[idx].img}
 						alt="upgrade logo"
 					/>

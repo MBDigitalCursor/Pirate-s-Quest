@@ -12,3 +12,23 @@
   font-size: 0.8rem;
   color: #158694;
 }
+
+.common-upgrade,
+.epic-upgrade,
+.rare-upgrade {
+  height: 30px;
+  padding: 0.2rem;
+  margin-right: 0.5rem;
+  margin-left: -0.2rem;
+  border-radius: 6px;
+  background-color: #04e762;
+}
+
+.epic-upgrade {
+  background-color: #dc0073;
+}
+
+
+.rare-upgrade {
+  background-color: #00a1e4;
+}
