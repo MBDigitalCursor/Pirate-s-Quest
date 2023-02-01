@@ -101,7 +101,7 @@ function UpgradeCard({ singleUpg, idx }) {
 						open={open}
 						anchorEl={anchorEl}
 					>
-						<Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>The content of the Popper.</Box>
+						<Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>{upgradeData[idx].desc}</Box>
 					</Popper>
 				</Box>
 			</Stack>

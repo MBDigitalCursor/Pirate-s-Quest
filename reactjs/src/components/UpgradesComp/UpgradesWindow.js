@@ -9,8 +9,6 @@ function UpgradesWindow() {
 
 	const { logged } = useSelector((state) => state.appStore);
 
-	const upgradesArray = logged.upgrades;
-
 	return (
 		<div
 			style={{
@@ -32,13 +30,14 @@ function UpgradesWindow() {
 					flexDirection: "column",
 				}}
 			>
-				{upgradesArray.map((singleUpg, i) => (
-					<UpgradeCard
-						idx={i}
-						key={i}
-						singleUpg={singleUpg}
-					/>
-				))}
+				{logged &&
+					logged.upgrades.map((singleUpg, i) => (
+						<UpgradeCard
+							idx={i}
+							key={i}
+							singleUpg={singleUpg}
+						/>
+					))}
 			</Box>
 		</div>
 	);
