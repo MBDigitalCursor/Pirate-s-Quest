@@ -10,11 +10,9 @@ import MainContext from "../../context/MainContext";
 import "../MainPage/mainPage.css";
 
 function Main() {
-	const { mousePos, logged } = useSelector((state) => state.appStore);
+	const { mousePos, logged, showDrop } = useSelector((state) => state.appStore);
 
 	const { dispatch, socket } = useContext(MainContext);
-
-	const [showDrop, setShowDrop] = useState(false);
 
 	return (
 		<div
