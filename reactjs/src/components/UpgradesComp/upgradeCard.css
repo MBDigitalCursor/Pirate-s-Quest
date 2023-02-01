@@ -1,0 +1,14 @@
+.upgrade-logo {
+  height: 30px;
+  padding-right: 0.7rem;
+}
+
+.upgrade-info h5 {
+  font-size: 0.7rem;
+}
+
+.upgrade-info span {
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: #158694;
+}
