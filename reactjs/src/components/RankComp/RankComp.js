@@ -16,11 +16,13 @@ function RankComp() {
 			console.log("logged ===", logged);
 			const currentRankTitle = logged.rank.rank;
 			const currentRankExp = logged.rank.exp;
-			const nextRankIndex = ranks.map((rank) => {
-				if (rank.exp > currentRankExp) {
-				}
+			let lastRank = "";
+			ranks.map((rank) => {
+				const el = rank.exp > currentRankExp;
+				console.log("rank.exp ===", rank);
+				return (lastRank = rank.exp);
 			});
-			console.log("nextRankIndex ===", nextRankIndex);
+			console.log("lastRank ===", lastRank);
 		};
 
 		checkProgress();
