@@ -37,7 +37,7 @@ function Main() {
 						color: "#621708",
 					}}
 				>
-					{(logged.upgrades.dropPerClickLevel / 10 + 1).toFixed(1)}
+					{(logged.upgrades[0].level / 10 + 1).toFixed(1)}
 				</p>
 			) : (
 				<p
@@ -52,7 +52,7 @@ function Main() {
 						color: "#621708",
 					}}
 				>
-					{logged && (logged.upgrades.dropPerClickLevel / 10 + 1).toFixed(1)}
+					{logged && (logged.upgrades[0].level / 10 + 1).toFixed(1)}
 				</p>
 			)}
 			<Stack
