@@ -17,7 +17,7 @@ function Register() {
 	const passRef = useRef();
 	const repeatPassRef = useRef();
 
-	const handleRegister = () => {
+	const handleRegister = async () => {
 		const newUser = {
 			nick: nickRef.current.value,
 			passOne: passRef.current.value,
@@ -32,12 +32,11 @@ function Register() {
 		// If registration succsesfuly, then show modal with response // TODO
 
 		axios.post(`${url}/register`, newUser).then((response) => {
-			if (response.data.error) {
-				console.log(response.data.message);
-				dispatch(setLoginError(response.data.message));
-			} else {
-				dispatch(setNewUser(true));
-			}
+			const error = response.data.error;
+
+			if (!error) dispatch(setNewUser(!newUser));
+
+			if (error) dispatch(setLoginError(response.data.message));
 		});
 	};
 
