@@ -8,13 +8,7 @@ import { setShowLeaderboardTrigger } from "../../store/appStore";
 function Leaderboard() {
 	const { dispatch } = useContext(MainContext);
 
-	const { showLeaderboardTrigger, allUsers } = useSelector((state) => state.appStore);
-
-	const sortedArrByExp = (arr) => {
-		return arr.sort((a, b) => b.rank.exp - a.rank.exp);
-	};
-
-	sortedArrByExp(allUsers);
+	const { showLeaderboardTrigger, allUsers, sortedUsersArray } = useSelector((state) => state.appStore);
 
 	const style = {
 		position: "absolute",
@@ -46,8 +40,9 @@ function Leaderboard() {
 						}}
 					>
 						{allUsers &&
-							sortedArrByExp.map((user) => (
+							sortedUsersArray.map((user, i) => (
 								<Stack
+									key={i}
 									direction="row"
 									sx={{
 										maxHeight: "35px",
@@ -61,7 +56,7 @@ function Leaderboard() {
 										<b>{user.nick}</b>
 									</p>
 									<p>
-										Experience points: <b>{user.rank.exp}</b>
+										Experience points: <b>{user.exp}</b>
 									</p>
 								</Stack>
 							))}

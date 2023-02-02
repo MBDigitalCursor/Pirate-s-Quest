@@ -13,6 +13,7 @@ export const appStore = createSlice({
 		showDrop: false,
 		showLeaderboardTrigger: false,
 		allUsers: [],
+		sortedUsersArray: [],
 		ranks: [
 			{
 				title: "Newbie",
@@ -76,9 +77,12 @@ export const appStore = createSlice({
 		setAllUsers: (state, action) => {
 			state.allUsers = action.payload;
 		},
+		setSortedUsersArray: (state, action) => {
+			state.sortedUsersArray = action.payload;
+		},
 	},
 });
 
-export const { setLogged, setMousePos, setLoginError, setNewUser, setProgress, setShowDrop, setShowUpgrades, setShowLeaderboardTrigger, setAllUsers } = appStore.actions;
+export const { setLogged, setMousePos, setLoginError, setNewUser, setProgress, setShowDrop, setShowUpgrades, setShowLeaderboardTrigger, setAllUsers, setSortedUsersArray } = appStore.actions;
 
 export default appStore.reducer;

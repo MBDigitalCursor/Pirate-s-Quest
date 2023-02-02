@@ -38,14 +38,6 @@ function App() {
 		});
 	}, [socket]);
 
-	useEffect(() => {
-		socket.emit("getAllUsers");
-
-		socket.on("getAllUsers", (users) => {
-			dispatch(setAllUsers(users));
-		});
-	}, [socket]);
-
 	const states = {
 		dispatch,
 		socket,

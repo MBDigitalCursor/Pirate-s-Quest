@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "./login.css";
@@ -9,11 +9,12 @@ import { Button, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import { BsFillPersonXFill, BsFillPersonCheckFill } from "react-icons/bs";
 import { toast } from "react-toastify";
+import MainContext from "../../context/MainContext";
 
 function Login() {
-	const dispatch = useDispatch();
 	const nav = useNavigate();
 	const { loginError, newUser } = useSelector((state) => state.appStore);
+	const { socket, dispatch } = useContext(MainContext);
 
 	const nickRef = useRef();
 	const passRef = useRef();
@@ -31,6 +32,7 @@ function Login() {
 				return;
 			} else {
 				toast(response.data.message);
+				socket.emit("getAllUsers");
 				localStorage.setItem("user_id", response.data.data.id);
 				dispatch(setLogged(response.data.data));
 				nav("/main");
@@ -41,8 +43,8 @@ function Login() {
 
 	return (
 		<Container
-			component='main'
-			maxWidth='xs'
+			component="main"
+			maxWidth="xs"
 		>
 			<Box
 				className={loginError ? "slide-top" : ""}
@@ -61,18 +63,18 @@ function Login() {
 				>
 					{loginError ? (
 						<BsFillPersonXFill
-							className='login-icon-error flip-2-hor-top-1 '
-							fontSize='2rem'
+							className="login-icon-error flip-2-hor-top-1 "
+							fontSize="2rem"
 						/>
 					) : (
 						<BsFillPersonCheckFill
-							className='login-icon'
-							fontSize='2rem'
+							className="login-icon"
+							fontSize="2rem"
 						/>
 					)}
 					<Typography
-						component='h1'
-						variant='h5'
+						component="h1"
+						variant="h5"
 						sx={{
 							marginTop: "1rem",
 							color: "#000",
@@ -85,23 +87,23 @@ function Login() {
 					<Box>
 						<TextField
 							inputRef={nickRef}
-							margin='normal'
+							margin="normal"
 							required
 							fullWidth
-							label='Nickname'
+							label="Nickname"
 							autoFocus
 						/>
 						<TextField
 							inputRef={passRef}
-							margin='normal'
-							color='primary'
+							margin="normal"
+							color="primary"
 							required
 							fullWidth
-							name='password'
-							label='Password'
-							type='password'
-							id='password'
-							autoComplete='current-password'
+							name="password"
+							label="Password"
+							type="password"
+							id="password"
+							autoComplete="current-password"
 						/>
 					</Box>
 				) : (
@@ -110,9 +112,9 @@ function Login() {
 							inputRef={nickRef}
 							error
 							fullWidth
-							id='outlined-error-helper-text'
-							label='Error'
-							color='primary'
+							id="outlined-error-helper-text"
+							label="Error"
+							color="primary"
 							helperText={loginError}
 							sx={{
 								marginTop: "0.55rem",
@@ -121,14 +123,14 @@ function Login() {
 						/>
 						<TextField
 							inputRef={passRef}
-							margin='normal'
+							margin="normal"
 							required
 							fullWidth
-							name='password'
-							label='Password'
-							type='password'
-							id='password'
-							autoComplete='current-password'
+							name="password"
+							label="Password"
+							type="password"
+							id="password"
+							autoComplete="current-password"
 						/>
 					</Box>
 				)}
@@ -138,8 +140,8 @@ function Login() {
 					<Button
 						onClick={handleLogin}
 						fullWidth
-						color='errorRed'
-						variant='contained'
+						color="errorRed"
+						variant="contained"
 						sx={{
 							mt: 3,
 							mb: 2,
@@ -155,8 +157,8 @@ function Login() {
 					<Button
 						onClick={handleLogin}
 						fullWidth
-						color='gold'
-						variant='contained'
+						color="gold"
+						variant="contained"
 						sx={{
 							mt: 3,
 							mb: 2,

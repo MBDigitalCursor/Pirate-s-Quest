@@ -9,9 +9,10 @@ import UpgradesWindow from "../../components/UpgradesComp/UpgradesWindow";
 import MainContext from "../../context/MainContext";
 import { toast } from "react-toastify";
 import "../MainPage/mainPage.css";
+import { setAllUsers, setSortedUsersArray } from "../../store/appStore";
 
 function Main() {
-	const { mousePos, logged, showDrop, showUpgrades } = useSelector((state) => state.appStore);
+	const { mousePos, logged, showDrop, showUpgrades, allUsers } = useSelector((state) => state.appStore);
 
 	const { dispatch, socket } = useContext(MainContext);
 
@@ -22,11 +23,32 @@ function Main() {
 		socket.on("maxLevel", (mess) => {
 			toast("⚠️ " + mess);
 		});
+		socket.emit("getAllUsers");
+		socket.on("getAllUsers", (users) => {
+			dispatch(setAllUsers(users));
+		});
 	}, []);
+
+	useEffect(() => {
+		if (allUsers.length !== 0) {
+			const sortedUser = () => {
+				return allUsers
+					.map((user) => {
+						return {
+							nick: user.nick,
+							exp: user.rank.exp,
+						};
+					})
+					.sort((a, b) => b.exp - a.exp);
+			};
+			const users = sortedUser();
+			dispatch(setSortedUsersArray(users));
+		}
+	}, [allUsers]);
 
 	return (
 		<div
-			className='main-page text-focus-in'
+			className="main-page text-focus-in"
 			style={{
 				position: "relative",
 				display: "flex",
@@ -66,7 +88,7 @@ function Main() {
 				</p>
 			)}
 			<Stack
-				direction='row'
+				direction="row"
 				spacing={6}
 			>
 				{showUpgrades && <UpgradesWindow />}
