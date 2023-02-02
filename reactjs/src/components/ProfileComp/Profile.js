@@ -1,14 +1,13 @@
-import { Box, Button, Typography } from "@mui/material";
-import { Stack } from "@mui/system";
+import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import MainContext from "../../context/MainContext";
-import { setLogged } from "../../store/appStore";
+import { setLogged, setShowUpgrades } from "../../store/appStore";
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
-	const { logged } = useSelector((state) => state.appStore);
+	const { logged, showUpgrades } = useSelector((state) => state.appStore);
 
 	const nav = useNavigate();
 
@@ -18,6 +17,15 @@ function Profile() {
 		dispatch(setLogged(null));
 		nav("/");
 		localStorage.removeItem("user_id");
+	};
+
+	const [anchorEl, setAnchorEl] = React.useState(null);
+	const open = Boolean(anchorEl);
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+	const handleClose = () => {
+		setAnchorEl(null);
 	};
 
 	return (
@@ -58,7 +66,7 @@ function Profile() {
 							variant="h6"
 							component="h6"
 							sx={{
-								paddingLeft: "0.5rem",
+								paddingRight: "1rem",
 							}}
 						>
 							{logged.nick}
@@ -71,16 +79,48 @@ function Profile() {
 								alignItems: "center",
 							}}
 						>
-							<Button
-								color="gold"
-								variant="contained"
-								sx={{
-									height: "80%",
-									marginRight: "0.3rem",
-								}}
-							>
-								Inventory
-							</Button>
+							<div>
+								<Button
+									color="gold"
+									variant="contained"
+									sx={{
+										height: "80%",
+										marginRight: "1rem",
+									}}
+									aria-controls={open ? "demo-positioned-menu" : undefined}
+									aria-haspopup="true"
+									aria-expanded={open ? "true" : undefined}
+									onClick={handleClick}
+								>
+									MENU
+								</Button>
+								<Menu
+									id="demo-positioned-menu"
+									aria-labelledby="demo-positioned-button"
+									anchorEl={anchorEl}
+									open={open}
+									onClose={handleClose}
+									anchorOrigin={{
+										vertical: "top",
+										horizontal: "left",
+									}}
+									transformOrigin={{
+										vertical: "top",
+										horizontal: "left",
+									}}
+								>
+									<MenuItem
+										onClick={() => {
+											dispatch(setShowUpgrades(true));
+											handleClose();
+										}}
+									>
+										Upgrades
+									</MenuItem>
+									<MenuItem onClick={handleClose}>Leaderboard</MenuItem>
+									<MenuItem onClick={handleClose}>Inventory</MenuItem>
+								</Menu>
+							</div>
 							<Button
 								variant="outlined"
 								onClick={logOut}

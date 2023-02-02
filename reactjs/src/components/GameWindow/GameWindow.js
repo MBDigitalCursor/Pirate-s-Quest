@@ -68,21 +68,6 @@ function GameWindow() {
 			>
 				<b>Gold:</b> {logged && logged.gold.toFixed(1)}
 			</p>
-
-			<Button
-				color='gold'
-				variant='contained'
-				onClick={() => dispatch(setShowUpgrades(!showUpgrades))}
-				sx={{
-					marginRight: "0.3rem",
-					position: "absolute",
-					top: "2%",
-					left: "5%",
-				}}
-			>
-				Upgrades
-			</Button>
-
 			{shakeTo === "left" ? (
 				<img
 					onClick={(e) => {
@@ -91,9 +76,9 @@ function GameWindow() {
 						handleClick(e);
 						addGold();
 					}}
-					className='clickable-object shake-left'
-					src='https://cdn-icons-png.flaticon.com/512/2826/2826202.png'
-					alt=''
+					className="clickable-object shake-left"
+					src="https://cdn-icons-png.flaticon.com/512/2826/2826202.png"
+					alt=""
 				/>
 			) : (
 				<img
@@ -103,9 +88,9 @@ function GameWindow() {
 						handleClick(e);
 						addGold();
 					}}
-					className='clickable-object shake-right'
-					src='https://cdn-icons-png.flaticon.com/512/2826/2826202.png'
-					alt=''
+					className="clickable-object shake-right"
+					src="https://cdn-icons-png.flaticon.com/512/2826/2826202.png"
+					alt=""
 				/>
 			)}
 		</Box>

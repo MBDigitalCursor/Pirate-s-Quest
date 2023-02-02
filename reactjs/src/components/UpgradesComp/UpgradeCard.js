@@ -114,8 +114,17 @@ function UpgradeCard({ singleUpg, idx }) {
 						id={id}
 						open={open}
 						anchorEl={anchorEl}
+						sx={{
+							zIndex: 1301,
+						}}
 					>
-						<Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
+						<Box
+							sx={{
+								border: 1,
+								p: 1,
+								bgcolor: "background.paper",
+							}}
+						>
 							<p>{upgradeData[idx].desc}</p>
 							<p>
 								Current upgrade level: <b>{singleUpg.level}</b>{" "}
