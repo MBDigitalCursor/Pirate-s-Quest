@@ -32,18 +32,18 @@ const UserSchema = new Schema({
 				costMultiplier: 1.2,
 			},
 			{
-				upgradeTitle: "critStrikeMultiplierLevel",
-				level: 0,
-				maxLevel: 40,
-				upgradeCost: 50,
-				costMultiplier: 1.4,
-			},
-			{
 				upgradeTitle: "critStrikeChanceLevel",
 				level: 0,
 				maxLevel: 250,
 				upgradeCost: 50,
 				costMultiplier: 1.2,
+			},
+			{
+				upgradeTitle: "critStrikeMultiplierLevel",
+				level: 0,
+				maxLevel: 40,
+				upgradeCost: 50,
+				costMultiplier: 1.4,
 			},
 			{
 				upgradeTitle: "autoIncomeAmountLevel",
