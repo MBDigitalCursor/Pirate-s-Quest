@@ -8,8 +8,8 @@ import { useDispatch } from "react-redux";
 import { io } from "socket.io-client";
 import MainContext from "../src/context/MainContext";
 import { useEffect } from "react";
-import { setLogged } from "./store/appStore";
-import { ToastContainer, toast } from "react-toastify";
+import { setAllUsers, setLogged } from "./store/appStore";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const socket = io.connect("http://localhost:5000");
@@ -42,7 +42,7 @@ function App() {
 		socket.emit("getAllUsers");
 
 		socket.on("getAllUsers", (users) => {
-			console.log("getAllUsers ==>", users);
+			dispatch(setAllUsers(users));
 		});
 	}, [socket]);
 
@@ -52,12 +52,12 @@ function App() {
 	};
 
 	return (
-		<div className='App'>
+		<div className="App">
 			<MainContext.Provider value={states}>
 				<ToastContainer
-					progressClassName='toast-progress'
-					className='toast'
-					position='bottom-right'
+					progressClassName="toast-progress"
+					className="toast"
+					position="bottom-right"
 					autoClose={1000}
 					hideProgressBar={false}
 					newestOnTop={false}
@@ -66,17 +66,17 @@ function App() {
 					pauseOnFocusLoss
 					draggable
 					pauseOnHover
-					theme='light'
+					theme="light"
 				/>
 				<ThemeProvider theme={theme}>
 					<BrowserRouter>
 						<Routes>
 							<Route
-								path='/'
+								path="/"
 								element={<LoginRegPage />}
 							/>
 							<Route
-								path='/main'
+								path="/main"
 								element={<Main></Main>}
 							></Route>
 						</Routes>

@@ -11,7 +11,8 @@ export const appStore = createSlice({
 		showUpgrades: false,
 		progress: 0,
 		showDrop: false,
-		showPoperTrigger: null,
+		showLeaderboardTrigger: false,
+		allUsers: [],
 		ranks: [
 			{
 				title: "Newbie",
@@ -69,9 +70,15 @@ export const appStore = createSlice({
 		setShowPoperTrigger: (state, action) => {
 			state.showPoperTrigger = action.payload;
 		},
+		setShowLeaderboardTrigger: (state, action) => {
+			state.showLeaderboardTrigger = action.payload;
+		},
+		setAllUsers: (state, action) => {
+			state.allUsers = action.payload;
+		},
 	},
 });
 
-export const { setLogged, setMousePos, setLoginError, setNewUser, setProgress, setShowDrop, setShowUpgrades, setShowPoperTrigger } = appStore.actions;
+export const { setLogged, setMousePos, setLoginError, setNewUser, setProgress, setShowDrop, setShowUpgrades, setShowLeaderboardTrigger, setAllUsers } = appStore.actions;
 
 export default appStore.reducer;

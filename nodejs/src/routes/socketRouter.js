@@ -89,6 +89,9 @@ module.exports = (io) => {
 				const updatedUser = await UserSchema.findOne({ id });
 				socket.emit("updatedUser", updatedUser);
 			}
+			// TODO iskelti i atskiras funkcijas
+			const allUsers = await UserSchema.find();
+			socket.emit("getAllUsers", allUsers);
 		});
 		socket.on("updateRank", async (id) => {
 			const foundUser = await UserSchema.findOne({ id });
@@ -113,12 +116,6 @@ module.exports = (io) => {
 			} else {
 				socket.emit("checkedUser", null);
 			}
-		});
-
-		socket.on("getAllUsers", async () => {
-			const allUsers = await UserSchema.find();
-
-			socket.emit("getAllUsers", allUsers);
 		});
 
 		socket.on("upgrade", async (data) => {

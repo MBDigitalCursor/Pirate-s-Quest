@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import MainContext from "../../context/MainContext";
-import { setLogged, setShowUpgrades } from "../../store/appStore";
+import { setLogged, setShowLeaderboardTrigger, setShowUpgrades } from "../../store/appStore";
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
@@ -117,7 +117,14 @@ function Profile() {
 									>
 										Upgrades
 									</MenuItem>
-									<MenuItem onClick={handleClose}>Leaderboard</MenuItem>
+									<MenuItem
+										onClick={() => {
+											dispatch(setShowLeaderboardTrigger(true));
+											handleClose();
+										}}
+									>
+										Leaderboard
+									</MenuItem>
 									<MenuItem onClick={handleClose}>Inventory</MenuItem>
 								</Menu>
 							</div>
