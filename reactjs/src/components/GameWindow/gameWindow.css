@@ -10,13 +10,13 @@
 }
 
 .clickable-object:hover {
-  transition: 0.1s ease-in-out;
-  transform: scale(1.01);
+  transition: 0.05s;
+  transform: scale(1.005);
 }
 
 .clickable-object:active {
-  transition: 0.1s ease-in-out;
-  transform: scale(0.99);
+  transition: 0.02s;
+  transform: scale(0.99995);
 }
 
 .shake-right {
