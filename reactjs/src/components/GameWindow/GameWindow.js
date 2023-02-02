@@ -49,7 +49,7 @@ function GameWindow() {
 			sx={{
 				boxShadow: "3px 3px 10px 1px #3b3939ad",
 				borderRadius: "4px",
-				padding: "4rem",
+				padding: "6rem 8rem",
 				boxSizing: "border-box",
 				position: "relative",
 				display: "flex",
@@ -70,8 +70,8 @@ function GameWindow() {
 			</p>
 
 			<Button
-				color="gold"
-				variant="contained"
+				color='gold'
+				variant='contained'
 				onClick={() => dispatch(setShowUpgrades(!showUpgrades))}
 				sx={{
 					marginRight: "0.3rem",
@@ -91,9 +91,9 @@ function GameWindow() {
 						handleClick(e);
 						addGold();
 					}}
-					className="clickable-object shake-left"
-					src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images"
-					alt=""
+					className='clickable-object shake-left'
+					src='https://cdn-icons-png.flaticon.com/512/2826/2826202.png'
+					alt=''
 				/>
 			) : (
 				<img
@@ -103,9 +103,9 @@ function GameWindow() {
 						handleClick(e);
 						addGold();
 					}}
-					className="clickable-object shake-right"
-					src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F2%2FOpened-Treasure-Chest-PNG-Free-Image.png&f=1&nofb=1&ipt=9261d953fc8d082a06759b160cd4c1bd83521b27e42ae1382c0bc1829bcf4014&ipo=images"
-					alt=""
+					className='clickable-object shake-right'
+					src='https://cdn-icons-png.flaticon.com/512/2826/2826202.png'
+					alt=''
 				/>
 			)}
 		</Box>

@@ -1,9 +1,8 @@
 .clickable-object {
-  max-width: 20rem;
-  max-height: 18rem;
   cursor: pointer;
-  border-radius: 30%;
-  background-color: rgba(206, 206, 206, 0.321);
+  background-color: transparent;
+  max-width: 75%;
+
 }
 
 .d-hidden {
