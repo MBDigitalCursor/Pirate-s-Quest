@@ -7,6 +7,7 @@ import Profile from "../../components/ProfileComp/Profile";
 import RankComp from "../../components/RankComp/RankComp";
 import UpgradesWindow from "../../components/UpgradesComp/UpgradesWindow";
 import MainContext from "../../context/MainContext";
+import { toast } from "react-toastify";
 import "../MainPage/mainPage.css";
 
 function Main() {
@@ -14,9 +15,18 @@ function Main() {
 
 	const { dispatch, socket } = useContext(MainContext);
 
+	useEffect(() => {
+		socket.on("goldError", (mess) => {
+			toast("💰 " + mess);
+		});
+		socket.on("maxLevel", (mess) => {
+			toast("⚠️ " + mess);
+		});
+	}, []);
+
 	return (
 		<div
-			className="main-page text-focus-in"
+			className='main-page text-focus-in'
 			style={{
 				position: "relative",
 				display: "flex",
@@ -56,7 +66,7 @@ function Main() {
 				</p>
 			)}
 			<Stack
-				direction="row"
+				direction='row'
 				spacing={6}
 			>
 				{showUpgrades && <UpgradesWindow />}

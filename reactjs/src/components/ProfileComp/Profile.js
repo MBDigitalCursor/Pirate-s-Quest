@@ -6,6 +6,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import MainContext from "../../context/MainContext";
 import { setLogged } from "../../store/appStore";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Profile() {
 	const { logged } = useSelector((state) => state.appStore);
@@ -15,6 +16,7 @@ function Profile() {
 	const { dispatch, socket } = useContext(MainContext);
 
 	const logOut = () => {
+		toast("Logged out");
 		dispatch(setLogged(null));
 		nav("/");
 		localStorage.removeItem("user_id");
@@ -44,7 +46,7 @@ function Profile() {
 							borderRadius: "50%",
 						}}
 						src={logged.profileImage ? logged.profileImage : "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"}
-						alt="default avatar"
+						alt='default avatar'
 					/>
 					<Box
 						sx={{
@@ -55,8 +57,8 @@ function Profile() {
 						}}
 					>
 						<Typography
-							variant="h6"
-							component="h6"
+							variant='h6'
+							component='h6'
 							sx={{
 								paddingLeft: "0.5rem",
 							}}
@@ -72,8 +74,8 @@ function Profile() {
 							}}
 						>
 							<Button
-								color="gold"
-								variant="contained"
+								color='gold'
+								variant='contained'
 								sx={{
 									height: "80%",
 									marginRight: "0.3rem",
@@ -82,7 +84,7 @@ function Profile() {
 								Inventory
 							</Button>
 							<Button
-								variant="outlined"
+								variant='outlined'
 								onClick={logOut}
 								sx={{
 									height: "60%",

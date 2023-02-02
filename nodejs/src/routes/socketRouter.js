@@ -131,14 +131,12 @@ module.exports = (io) => {
 				const upgradeToUpdate = user.upgrades[foundUpgIndex];
 				const oldCost = upgradeToUpdate.upgradeCost;
 				if (user.gold < oldCost) {
-					// TODO Fronte prideti klaidos atvaizdavima
 					socket.emit("goldError", "Not enought gold for upgrade");
 					return;
 				}
 				// TODO Prideti kainos apvalinima Math.
 				if (upgradeToUpdate.level >= upgradeToUpdate.maxLevel) {
-					// TODO Fronte prideti klaidos atvaizdavima
-					socket.emit("maxLevel", "You reach max level of this upgrade");
+					socket.emit("maxLevel", "You reach max level for this upgrade");
 					return;
 				}
 				upgradeToUpdate.level += 1;

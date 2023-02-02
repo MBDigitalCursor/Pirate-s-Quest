@@ -7,6 +7,12 @@
   height: 100vh;
 }
 
+
+
+.toast-progress {
+  background-color: #fff;
+}
+
 h1,
 h2,
 h3,

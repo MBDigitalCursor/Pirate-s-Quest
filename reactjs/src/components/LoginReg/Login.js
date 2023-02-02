@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import { BsFillPersonXFill, BsFillPersonCheckFill } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 function Login() {
 	const dispatch = useDispatch();
@@ -27,11 +28,13 @@ function Login() {
 			if (response.data.error) {
 				console.log(response.data.message);
 				dispatch(setLoginError(response.data.message));
+				return;
 			} else {
-				console.log("response.data.data ===", response.data.data);
+				toast(response.data.message);
 				localStorage.setItem("user_id", response.data.data.id);
 				dispatch(setLogged(response.data.data));
 				nav("/main");
+				return;
 			}
 		});
 	};

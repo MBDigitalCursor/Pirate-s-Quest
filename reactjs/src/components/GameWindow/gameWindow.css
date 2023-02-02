@@ -14,8 +14,13 @@
   transform: scale(1.01);
 }
 
+.clickable-object:active {
+  transition: 0.1s ease-in-out;
+  transform: scale(0.99);
+}
+
 .shake-right {
-  animation: shake-right 0.3s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  animation: shake-right 0.1s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
 @keyframes shake-right {
@@ -27,11 +32,11 @@
   }
 
   20% {
-    transform: rotate(1deg);
+    transform: rotate(6px);
   }
 
   40% {
-    transform: rotate(-1deg);
+    transform: rotate(-6px);
   }
 
   60% {
@@ -39,12 +44,12 @@
   }
 
   80% {
-    transform: rotate(1deg);
+    transform: rotate(6px);
   }
 }
 
 .shake-left {
-  animation: shake-left 0.3s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  animation: shake-left 0.1s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
 @keyframes shake-left {
@@ -56,11 +61,11 @@
   }
 
   20% {
-    transform: rotate(1deg);
+    transform: rotate(6px);
   }
 
   40% {
-    transform: rotate(-1deg);
+    transform: rotate(-6px);
   }
 
   60% {
@@ -68,6 +73,6 @@
   }
 
   80% {
-    transform: rotate(1deg);
+    transform: rotate(6px);
   }
 }
