@@ -50,22 +50,24 @@ function App() {
 	};
 
 	return (
-		<MainContext.Provider value={states}>
-			<ThemeProvider theme={theme}>
-				<BrowserRouter>
-					<Routes>
-						<Route
-							path="/"
-							element={<LoginRegPage />}
-						/>
-						<Route
-							path="/main"
-							element={<Main></Main>}
-						></Route>
-					</Routes>
-				</BrowserRouter>
-			</ThemeProvider>
-		</MainContext.Provider>
+		<div className="App">
+			<MainContext.Provider value={states}>
+				<ThemeProvider theme={theme}>
+					<BrowserRouter>
+						<Routes>
+							<Route
+								path="/"
+								element={<LoginRegPage />}
+							/>
+							<Route
+								path="/main"
+								element={<Main></Main>}
+							></Route>
+						</Routes>
+					</BrowserRouter>
+				</ThemeProvider>
+			</MainContext.Provider>
+		</div>
 	);
 }
 

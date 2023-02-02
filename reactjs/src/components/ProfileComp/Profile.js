@@ -26,7 +26,6 @@ function Profile() {
 				<Box
 					sx={{
 						position: "absolute",
-						width: "20rem",
 						height: "5rem",
 						padding: "0.5rem",
 						boxSizing: "border-box",
@@ -45,7 +44,7 @@ function Profile() {
 							borderRadius: "50%",
 						}}
 						src={logged.profileImage ? logged.profileImage : "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"}
-						alt='default avatar'
+						alt="default avatar"
 					/>
 					<Box
 						sx={{
@@ -56,8 +55,8 @@ function Profile() {
 						}}
 					>
 						<Typography
-							variant='h6'
-							component='h6'
+							variant="h6"
+							component="h6"
 							sx={{
 								paddingLeft: "0.5rem",
 							}}
@@ -73,8 +72,8 @@ function Profile() {
 							}}
 						>
 							<Button
-								color='gold'
-								variant='contained'
+								color="gold"
+								variant="contained"
 								sx={{
 									height: "80%",
 									marginRight: "0.3rem",
@@ -83,7 +82,7 @@ function Profile() {
 								Inventory
 							</Button>
 							<Button
-								variant='outlined'
+								variant="outlined"
 								onClick={logOut}
 								sx={{
 									height: "60%",

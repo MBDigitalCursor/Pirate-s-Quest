@@ -12,12 +12,11 @@ function UpgradesWindow() {
 	return (
 		<div
 			style={{
-				height: "610px",
 				padding: "5px 5px",
 				boxSizing: "border-box",
 				boxShadow: "3px 3px 10px 1px #3b3939ad",
 				borderRadius: "4px",
-				width: "18rem",
+				width: "20rem",
 				backdropFilter: "blur(4px)",
 			}}
 		>
@@ -25,7 +24,6 @@ function UpgradesWindow() {
 
 			<Box
 				sx={{
-					height: "50px",
 					display: "flex",
 					flexDirection: "column",
 				}}

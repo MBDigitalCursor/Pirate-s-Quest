@@ -47,11 +47,9 @@ function GameWindow() {
 	return (
 		<Box
 			sx={{
-				width: "900px",
-				height: "600px",
 				boxShadow: "3px 3px 10px 1px #3b3939ad",
 				borderRadius: "4px",
-				padding: "20px",
+				padding: "4rem",
 				boxSizing: "border-box",
 				position: "relative",
 				display: "flex",

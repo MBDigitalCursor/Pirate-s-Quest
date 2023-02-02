@@ -1,6 +1,9 @@
 .App {
   text-align: center;
-  background-image: url('https: //external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2FE2w2TzO.jpg&f=1&nofb=1&ipt=d200b89478150f6f5139881f30ecf182e9a2e5327c35877ce5ab007065806589&ipo=images');
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2FE2w2TzO.jpg&f=1&nofb=1&ipt=d200b89478150f6f5139881f30ecf182e9a2e5327c35877ce5ab007065806589&ipo=images');
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
   height: 100vh;
 }
 

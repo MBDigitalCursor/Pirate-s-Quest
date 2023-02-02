@@ -20,6 +20,7 @@ function LoginReg() {
 			sx={{
 				display: "flex",
 				justifyContent: "space-between",
+				backgroundColor: "white",
 			}}
 		>
 			<Box
