@@ -4,6 +4,7 @@ import "../GameWindow/gameWindow.css";
 import { useSelector } from "react-redux";
 import { setLogged, setMousePos, setProgress, setShowDrop, setShowUpgrades } from "../../store/appStore";
 import MainContext from "../../context/MainContext";
+import { toast } from "react-toastify";
 
 function GameWindow() {
 	const { dispatch, socket } = useContext(MainContext);
@@ -76,9 +77,15 @@ function GameWindow() {
 						handleClick(e);
 						addGold();
 					}}
+<<<<<<< HEAD
 					className="clickable-object shake-left"
 					src="https://cdn-icons-png.flaticon.com/512/2826/2826202.png"
 					alt=""
+=======
+					className='clickable-object'
+					src='https://cdn-icons-png.flaticon.com/512/2826/2826202.png'
+					alt=''
+>>>>>>> 0a6503a4964b511693df07a2d65c264dd68a647f
 				/>
 			) : (
 				<img
@@ -88,9 +95,15 @@ function GameWindow() {
 						handleClick(e);
 						addGold();
 					}}
+<<<<<<< HEAD
 					className="clickable-object shake-right"
 					src="https://cdn-icons-png.flaticon.com/512/2826/2826202.png"
 					alt=""
+=======
+					className='clickable-object'
+					src='https://cdn-icons-png.flaticon.com/512/2826/2826202.png'
+					alt=''
+>>>>>>> 0a6503a4964b511693df07a2d65c264dd68a647f
 				/>
 			)}
 		</Box>

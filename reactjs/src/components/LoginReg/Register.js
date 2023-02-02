@@ -7,6 +7,7 @@ import { postReq } from "../../utils/http";
 import "./register.css";
 import axios from "axios";
 import { setLogged, setLoginError, setNewUser } from "../../store/appStore";
+import { toast } from "react-toastify";
 
 function Register() {
 	const dispatch = useDispatch();
@@ -29,15 +30,17 @@ function Register() {
 			return;
 		}
 
-		// If registration succsesfuly, then show modal with response // TODO
+		// If registration succsesfuly, then show toastify with response // TODO
 
 		axios.post(`${url}/register`, newUserObj).then((response) => {
 			if (response.data.error) {
 				console.log(response.data.message);
 				dispatch(setLoginError(response.data.message));
+				return;
 			} else {
-				console.log(response.data.message);
+				toast(response.data.message);
 				dispatch(setNewUser(!newUser));
+				return;
 			}
 		});
 	};

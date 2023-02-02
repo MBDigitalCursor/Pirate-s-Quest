@@ -43,7 +43,7 @@ function UpgradeCard({ singleUpg, idx }) {
 
 	return (
 		<Box
-			className="single-upgrade-card"
+			className='single-upgrade-card'
 			sx={{
 				maxHeight: "35px",
 				border: "1px solid slategrey",
@@ -52,14 +52,14 @@ function UpgradeCard({ singleUpg, idx }) {
 			}}
 		>
 			<Stack
-				direction="row"
+				direction='row'
 				sx={{
 					justifyContent: "space-between",
 					alignItems: "center",
 				}}
 			>
 				<Stack
-					direction="row"
+					direction='row'
 					sx={{
 						alignItems: "center",
 					}}
@@ -67,9 +67,9 @@ function UpgradeCard({ singleUpg, idx }) {
 					<img
 						className={checkDropRarity(idx)}
 						src={upgradeData[idx].img}
-						alt="upgrade logo"
+						alt='upgrade logo'
 					/>
-					<Box className="upgrade-info">
+					<Box className='upgrade-info'>
 						<h5>
 							{upgradeData[idx].title} <span>${singleUpg.upgradeCost.toFixed(0)}</span>
 						</h5>
@@ -77,8 +77,8 @@ function UpgradeCard({ singleUpg, idx }) {
 				</Stack>
 				<Box>
 					<Button
-						color="gold"
-						variant="contained"
+						color='gold'
+						variant='contained'
 						onClick={() => upgrade(upgradeData[idx].upg)}
 						sx={{
 							fontSize: "0.8rem",
