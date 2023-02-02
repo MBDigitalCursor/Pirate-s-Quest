@@ -1,8 +1,5 @@
 const UserSchema = require("../schemas/UserSchema");
 
-var db = require("mongodb").MongoClient;
-var url = "localhost:5000";
-
 const ranks = [
 	{
 		title: "Newbie",
@@ -67,25 +64,65 @@ function updateRank(currentExp) {
 	return title;
 }
 
+const caclPercent = (user) => {
+	const rnd = Math.random() * 100;
+	const critChance = user.upgrades[1].step * user.upgrades[1].level;
+	const critMultiplier = 2 + user.upgrades[2].step * user.upgrades[2].level;
+	if (50 > rnd) {
+		const goldPerClick = 1 + user.upgrades[0].level * user.upgrades[0].step;
+		const goldAmount = goldPerClick * critMultiplier;
+		console.log("goldPerClick ===", goldPerClick);
+		console.log("goldAmount ===", goldAmount);
+		return {
+			active: true,
+			goldAmount,
+		};
+	} else {
+		return {
+			active: false,
+			goldAmount: 0,
+		};
+	}
+};
+
 module.exports = (io) => {
 	io.on("connect", (socket) => {
 		socket.on("addGold", async (id) => {
 			const foundUser = await UserSchema.findOne({ id });
 			const newRank = updateRank(foundUser.rank.exp);
-
 			if (foundUser) {
-				await UserSchema.findOneAndUpdate(
-					{ id },
-					{
-						$inc: {
-							gold: 1 + foundUser.upgrades[0].level / 10,
-							"rank.exp": 1,
-						},
-						$set: {
-							"rank.rank": newRank,
-						},
-					}
-				);
+				if (caclPercent(foundUser).active) {
+					const critMultiplier = 2 + foundUser.upgrades[2].step * foundUser.upgrades[2].level;
+					const goldPerClick = 1 + foundUser.upgrades[0].level * foundUser.upgrades[0].step;
+
+					await UserSchema.findOneAndUpdate(
+						{ id },
+						{
+							$inc: {
+								gold: goldPerClick * critMultiplier,
+								"rank.exp": 2 + foundUser.upgrades[2].step * foundUser.upgrades[2].level,
+							},
+							$set: {
+								"rank.rank": newRank,
+							},
+						}
+					);
+					socket.emit("goldAmount", goldPerClick * critMultiplier);
+				} else {
+					await UserSchema.findOneAndUpdate(
+						{ id },
+						{
+							$inc: {
+								gold: 1 + foundUser.upgrades[0].level / 10,
+								"rank.exp": 1,
+							},
+							$set: {
+								"rank.rank": newRank,
+							},
+						}
+					);
+					socket.emit("goldAmount", 1 + foundUser.upgrades[0].level / 10);
+				}
 				const updatedUser = await UserSchema.findOne({ id });
 				socket.emit("updatedUser", updatedUser);
 			}
@@ -124,9 +161,7 @@ module.exports = (io) => {
 
 		socket.on("upgrade", async (data) => {
 			const { userId, upgrade } = data;
-
 			const user = await UserSchema.findOne({ id: userId });
-
 			if (user) {
 				const foundUpgIndex = user.upgrades.findIndex((upg) => upg.upgradeTitle === upgrade);
 				const upgradeToUpdate = user.upgrades[foundUpgIndex];

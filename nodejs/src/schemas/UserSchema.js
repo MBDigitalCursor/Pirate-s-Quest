@@ -29,6 +29,7 @@ const UserSchema = new Schema({
 				level: 1,
 				maxLevel: 99999,
 				upgradeCost: 20,
+				step: 0.1,
 				costMultiplier: 1.2,
 			},
 			{
@@ -36,6 +37,7 @@ const UserSchema = new Schema({
 				level: 0,
 				maxLevel: 250,
 				upgradeCost: 50,
+				step: 0.2,
 				costMultiplier: 1.2,
 			},
 			{
@@ -43,6 +45,7 @@ const UserSchema = new Schema({
 				level: 0,
 				maxLevel: 40,
 				upgradeCost: 50,
+				step: 0.2,
 				costMultiplier: 1.4,
 			},
 			{
@@ -50,6 +53,7 @@ const UserSchema = new Schema({
 				level: 0,
 				maxLevel: 99999,
 				upgradeCost: 100,
+				step: 1,
 				costMultiplier: 1.2,
 			},
 			{
@@ -57,6 +61,7 @@ const UserSchema = new Schema({
 				level: 0,
 				maxLevel: 6,
 				upgradeCost: 100,
+				step: 0.5,
 				costMultiplier: 2,
 			},
 			{
@@ -64,6 +69,7 @@ const UserSchema = new Schema({
 				level: 0,
 				maxLevel: 99999,
 				upgradeCost: 50,
+				step: 0.2,
 				costMultiplier: 1.4,
 			},
 			{
@@ -71,6 +77,7 @@ const UserSchema = new Schema({
 				level: 0,
 				maxLevel: 99999,
 				upgradeCost: 50,
+				step: 0.1,
 				costMultiplier: 1.4,
 			},
 			{
@@ -78,6 +85,7 @@ const UserSchema = new Schema({
 				level: 0,
 				maxLevel: 25,
 				upgradeCost: 200,
+				step: 0.2,
 				costMultiplier: 1.2,
 			},
 			{
@@ -85,6 +93,7 @@ const UserSchema = new Schema({
 				level: 0,
 				maxLevel: 25,
 				upgradeCost: 400,
+				step: 0.2,
 				costMultiplier: 1.2,
 			},
 			{
@@ -92,6 +101,7 @@ const UserSchema = new Schema({
 				level: 0,
 				maxLevel: 25,
 				upgradeCost: 800,
+				step: 0.2,
 				costMultiplier: 1.2,
 			},
 		],

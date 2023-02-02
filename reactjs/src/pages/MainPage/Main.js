@@ -9,12 +9,23 @@ import UpgradesWindow from "../../components/UpgradesComp/UpgradesWindow";
 import MainContext from "../../context/MainContext";
 import { toast } from "react-toastify";
 import "../MainPage/mainPage.css";
-import { setAllUsers, setSortedUsersArray } from "../../store/appStore";
+import { setAllUsers, setGoldDropped, setSortedUsersArray } from "../../store/appStore";
 
 function Main() {
 	const { mousePos, logged, showDrop, showUpgrades, allUsers } = useSelector((state) => state.appStore);
 
 	const { dispatch, socket } = useContext(MainContext);
+
+	const [goldDropped, setGoldDropped] = useState(0);
+
+	useEffect(() => {
+		if (logged) {
+			// TODO
+			socket.on("goldAmount", (gold) => {
+				dispatch(setGoldDropped(gold));
+			});
+		}
+	}, [logged, socket, dispatch]);
 
 	useEffect(() => {
 		socket.on("goldError", (mess) => {
@@ -48,7 +59,7 @@ function Main() {
 
 	return (
 		<div
-			className="main-page text-focus-in"
+			className='main-page text-focus-in'
 			style={{
 				position: "relative",
 				display: "flex",
@@ -69,7 +80,7 @@ function Main() {
 						color: "#621708",
 					}}
 				>
-					{(logged.upgrades[0].level / 10 + 1).toFixed(1)}
+					{goldDropped}
 				</p>
 			) : (
 				<p
@@ -84,11 +95,11 @@ function Main() {
 						color: "#621708",
 					}}
 				>
-					{logged && (logged.upgrades[0].level / 10 + 1).toFixed(1)}
+					{goldDropped}
 				</p>
 			)}
 			<Stack
-				direction="row"
+				direction='row'
 				spacing={6}
 			>
 				{showUpgrades && <UpgradesWindow />}
