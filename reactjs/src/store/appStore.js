@@ -1,88 +1,99 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, applyMiddleware } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 
-export const appStore = createSlice({
-	name: "appStore",
-	initialState: {
-		logged: null,
-		mousePos: {},
-		loginError: "",
-		url: "http://localhost:5000",
-		newUser: false,
-		showUpgrades: false,
-		progress: 0,
-		showDrop: false,
-		showLeaderboardTrigger: false,
-		allUsers: [],
-		sortedUsersArray: [],
-		ranks: [
-			{
-				title: "Newbie",
-				exp: 0,
+export const appStore = createSlice(
+	{
+		name: "appStore",
+		initialState: {
+			logged: null,
+			mousePos: {},
+			loginError: "",
+			url: "http://localhost:5000",
+			newUser: false,
+			showUpgrades: false,
+			progress: 0,
+			showDrop: false,
+			showLeaderboardTrigger: false,
+			allUsers: [],
+			sortedUsersArray: [],
+			ranks: [
+				{
+					title: "Newbie",
+					exp: 0,
+				},
+				{
+					title: "Cooper",
+					exp: 1000,
+				},
+				{
+					title: "Striker",
+					exp: 5000,
+				},
+				{
+					title: "Gunner",
+					exp: 12000,
+				},
+				{
+					title: "Navigator",
+					exp: 20000,
+				},
+				{
+					title: "Captain",
+					exp: 35000,
+				},
+				{
+					title: "Jack Sparrow",
+					exp: 50000,
+				},
+			],
+			goldDropped: 0,
+		},
+		reducers: {
+			setLogged: (state, action) => {
+				state.logged = action.payload;
 			},
-			{
-				title: "Cooper",
-				exp: 1000,
+			setMousePos: (state, action) => {
+				state.mousePos = action.payload;
 			},
-			{
-				title: "Striker",
-				exp: 5000,
+			setLoginError: (state, action) => {
+				state.loginError = action.payload;
 			},
-			{
-				title: "Gunner",
-				exp: 12000,
+			setNewUser: (state, action) => {
+				state.newUser = action.payload;
 			},
-			{
-				title: "Navigator",
-				exp: 20000,
+			setProgress: (state, action) => {
+				const currentUserRank = state.logged.rank;
+				const currentRankIndex = state.ranks.findIndex((rank) => rank.title === currentUserRank.rank);
+				const nextRank = state.ranks[currentRankIndex + 1];
+				const progressPercent = (currentUserRank.exp * 100) / nextRank.exp;
+				state.progress = progressPercent;
 			},
-			{
-				title: "Captain",
-				exp: 35000,
+			setShowDrop: (state, action) => {
+				state.showDrop = action.payload;
 			},
-			{
-				title: "Jack Sparrow",
-				exp: 50000,
+			setShowUpgrades: (state, action) => {
+				state.showUpgrades = action.payload;
 			},
-		],
+			setShowPoperTrigger: (state, action) => {
+				state.showPoperTrigger = action.payload;
+			},
+			setShowLeaderboardTrigger: (state, action) => {
+				state.showLeaderboardTrigger = action.payload;
+			},
+			setAllUsers: (state, action) => {
+				state.allUsers = action.payload;
+			},
+			setSortedUsersArray: (state, action) => {
+				state.sortedUsersArray = action.payload;
+			},
+			setGoldDropped: (state, action) => {
+				state.goldDropped = action.payload;
+			},
+		},
 	},
-	reducers: {
-		setLogged: (state, action) => {
-			state.logged = action.payload;
-		},
+	applyMiddleware(thunk)
+);
 
-		setMousePos: (state, action) => {
-			state.mousePos = action.payload;
-		},
-		setLoginError: (state, action) => {
-			state.loginError = action.payload;
-		},
-		setNewUser: (state, action) => {
-			state.newUser = action.payload;
-		},
-		setProgress: (state, action) => {
-			state.progress = action.payload;
-		},
-		setShowDrop: (state, action) => {
-			state.showDrop = action.payload;
-		},
-		setShowUpgrades: (state, action) => {
-			state.showUpgrades = action.payload;
-		},
-		setShowPoperTrigger: (state, action) => {
-			state.showPoperTrigger = action.payload;
-		},
-		setShowLeaderboardTrigger: (state, action) => {
-			state.showLeaderboardTrigger = action.payload;
-		},
-		setAllUsers: (state, action) => {
-			state.allUsers = action.payload;
-		},
-		setSortedUsersArray: (state, action) => {
-			state.sortedUsersArray = action.payload;
-		},
-	},
-});
-
-export const { setLogged, setMousePos, setLoginError, setNewUser, setProgress, setShowDrop, setShowUpgrades, setShowLeaderboardTrigger, setAllUsers, setSortedUsersArray } = appStore.actions;
+export const { setLogged, setMousePos, setLoginError, setNewUser, setProgress, setShowDrop, setShowUpgrades, setShowLeaderboardTrigger, setAllUsers, setSortedUsersArray, setGoldDropped } = appStore.actions;
 
 export default appStore.reducer;

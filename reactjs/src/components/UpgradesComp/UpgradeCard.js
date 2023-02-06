@@ -6,9 +6,10 @@ import MainContext from "../../context/MainContext";
 import HelpIcon from "@mui/icons-material/Help";
 import upgradeData from "../../helpers/upgrades.json";
 import "./upgradeCard.css";
+import { handleUpgradeThunk } from "../../utils/thunkCreators";
 
 function UpgradeCard({ singleUpg, idx }) {
-	const { socket } = useContext(MainContext);
+	const { dispatch } = useContext(MainContext);
 	const { logged } = useSelector((state) => state.appStore);
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,7 +23,7 @@ function UpgradeCard({ singleUpg, idx }) {
 			userId: logged.id,
 			upgrade,
 		};
-		socket.emit("upgrade", data);
+		dispatch(handleUpgradeThunk(data));
 	};
 
 	const checkDropRarity = (id) => {

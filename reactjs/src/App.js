@@ -8,9 +8,9 @@ import { useDispatch } from "react-redux";
 import { io } from "socket.io-client";
 import MainContext from "../src/context/MainContext";
 import { useEffect } from "react";
-import { setAllUsers, setLogged } from "./store/appStore";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getUsersThunk, userLoggedThunk } from "./utils/thunkCreators";
 
 const socket = io.connect("http://localhost:5000");
 
@@ -29,14 +29,12 @@ function App() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		socket.emit("checkUser", localStorage.getItem("user_id"));
-	}, [socket]);
-
-	useEffect(() => {
-		socket.on("checkedUser", (user) => {
-			dispatch(setLogged(user));
-		});
-	}, [socket]);
+		const userId = localStorage.getItem("user_id");
+		if (userId !== "") {
+			dispatch(userLoggedThunk(localStorage.getItem("user_id")));
+		}
+		dispatch(getUsersThunk());
+	}, []);
 
 	const states = {
 		dispatch,
@@ -44,12 +42,12 @@ function App() {
 	};
 
 	return (
-		<div className="App">
+		<div className='App'>
 			<MainContext.Provider value={states}>
 				<ToastContainer
-					progressClassName="toast-progress"
-					className="toast"
-					position="bottom-right"
+					progressClassName='toast-progress'
+					className='toast'
+					position='bottom-right'
 					autoClose={1000}
 					hideProgressBar={false}
 					newestOnTop={false}
@@ -58,17 +56,17 @@ function App() {
 					pauseOnFocusLoss
 					draggable
 					pauseOnHover
-					theme="light"
+					theme='light'
 				/>
 				<ThemeProvider theme={theme}>
 					<BrowserRouter>
 						<Routes>
 							<Route
-								path="/"
+								path='/'
 								element={<LoginRegPage />}
 							/>
 							<Route
-								path="/main"
+								path='/main'
 								element={<Main></Main>}
 							></Route>
 						</Routes>

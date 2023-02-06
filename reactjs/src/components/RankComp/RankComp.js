@@ -1,23 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { Box, LinearProgress } from "@mui/material";
 import { useSelector } from "react-redux";
-import MainContext from "../../context/MainContext.js";
-import { setProgress } from "../../store/appStore.js";
 
 function RankComp() {
-	const { socket, dispatch } = useContext(MainContext);
-
-	const { logged, progress, ranks } = useSelector((state) => state.appStore);
-
-	useEffect(() => {
-		if (logged) {
-			const currentUserRank = logged.rank;
-			const currentRankIndex = ranks.findIndex((rank) => rank.title === currentUserRank.rank);
-			const nextRank = ranks[currentRankIndex + 1];
-			const progressPercent = (currentUserRank.exp * 100) / nextRank.exp;
-			dispatch(setProgress(progressPercent));
-		}
-	}, [socket, logged, dispatch, ranks]);
+	const { logged, progress } = useSelector((state) => state.appStore);
 
 	return (
 		<div
