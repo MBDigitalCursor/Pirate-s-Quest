@@ -1,5 +1,5 @@
 import { Stack } from "@mui/system";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import GameWindow from "../../components/GameWindow/GameWindow";
 import Leadersboard from "../../components/LeadersBoard/Leadersboard";
@@ -11,7 +11,9 @@ import "../MainPage/mainPage.css";
 function Main() {
 	const { mousePos, showDrop, showUpgrades, goldDropped } = useSelector((state) => state.appStore);
 
-	console.log(goldDropped);
+	useEffect(() => {
+		console.log(goldDropped);
+	}, []);
 
 	return (
 		<div

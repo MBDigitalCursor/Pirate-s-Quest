@@ -1,5 +1,5 @@
 import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import MainContext from "../../context/MainContext";
@@ -19,7 +19,7 @@ function Profile() {
 		localStorage.removeItem("user_id");
 	};
 
-	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -35,6 +35,7 @@ function Profile() {
 					sx={{
 						position: "absolute",
 						height: "5rem",
+						width: "20rem",
 						padding: "0.5rem",
 						boxSizing: "border-box",
 						boxShadow: "3px 3px 10px 1px #3b3939ad",
@@ -52,7 +53,7 @@ function Profile() {
 							borderRadius: "50%",
 						}}
 						src={logged.profileImage ? logged.profileImage : "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"}
-						alt="default avatar"
+						alt='default avatar'
 					/>
 					<Box
 						sx={{
@@ -63,8 +64,8 @@ function Profile() {
 						}}
 					>
 						<Typography
-							variant="h6"
-							component="h6"
+							variant='h6'
+							component='h6'
 							sx={{
 								paddingRight: "1rem",
 							}}
@@ -81,22 +82,22 @@ function Profile() {
 						>
 							<div>
 								<Button
-									color="gold"
-									variant="contained"
+									color='gold'
+									variant='contained'
 									sx={{
 										height: "80%",
 										marginRight: "1rem",
 									}}
 									aria-controls={open ? "demo-positioned-menu" : undefined}
-									aria-haspopup="true"
+									aria-haspopup='true'
 									aria-expanded={open ? "true" : undefined}
 									onClick={handleClick}
 								>
 									MENU
 								</Button>
 								<Menu
-									id="demo-positioned-menu"
-									aria-labelledby="demo-positioned-button"
+									id='demo-positioned-menu'
+									aria-labelledby='demo-positioned-button'
 									anchorEl={anchorEl}
 									open={open}
 									onClose={handleClose}
@@ -129,7 +130,7 @@ function Profile() {
 								</Menu>
 							</div>
 							<Button
-								variant="outlined"
+								variant='outlined'
 								onClick={logOut}
 								sx={{
 									height: "60%",
