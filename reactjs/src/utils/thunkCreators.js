@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { setAllUsers, setGoldDropped, setLogged, setProgress } from "../store/appStore";
+import { setAllUsers, setGoldDropped, setGoldDroppedArr, setLogged, setProgress } from "../store/appStore";
 
 const url = "http://localhost:5000";
 
@@ -9,7 +9,7 @@ export const handleDropThunk = (id) => (dispatch) => {
 		const data = res.data.data;
 		dispatch(setLogged(data.user));
 		dispatch(setProgress());
-		dispatch(setGoldDropped(data.goldReceived));
+		dispatch(setGoldDroppedArr(data.goldReceived));
 	});
 };
 

@@ -19,60 +19,34 @@
   transform: scale(0.99995);
 }
 
-.shake-right {
-  animation: shake-right 0.1s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+.text-blur-scale {
+  animation: text-blur-scale 200ms cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
-@keyframes shake-right {
+@keyframes text-blur-scale {
+  0% {
+    filter: blur(0.01);
+    transform: scale(1);
+  }
 
-  0%,
   100% {
-    transform: rotate(0deg);
-    transform-origin: 100% 50%;
-  }
-
-  20% {
-    transform: rotate(6px);
-  }
-
-  40% {
-    transform: rotate(-6px);
-  }
-
-  60% {
-    transform: rotate(0deg);
-  }
-
-  80% {
-    transform: rotate(6px);
+    filter: blur(12px) opacity(0%);
+    transform: scale(0);
   }
 }
 
-.shake-left {
-  animation: shake-left 0.1s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+.text-blur {
+  animation: text-blur 200ms cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
-@keyframes shake-left {
+@keyframes text-blur {
+  0% {
+    filter: blur(0.01);
+    transform: scale(1);
+  }
 
-  0%,
   100% {
-    transform: rotate(0deg);
-    transform-origin: 0 50%;
-  }
-
-  20% {
-    transform: rotate(6px);
-  }
-
-  40% {
-    transform: rotate(-6px);
-  }
-
-  60% {
-    transform: rotate(0deg);
-  }
-
-  80% {
-    transform: rotate(6px);
+    filter: blur(12px) opacity(0%);
+    transform: scale(0);
   }
 }

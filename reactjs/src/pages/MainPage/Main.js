@@ -25,21 +25,6 @@ function Main() {
 				paddingTop: "10rem",
 			}}
 		>
-			<p
-				className={`${showDrop ? "scale-out-top" : ""}`}
-				style={{
-					position: "absolute",
-					top: `${mousePos.y - 80}px`,
-					left: mousePos.x,
-					fontSize: "2rem",
-					zIndex: 10,
-					fontWeight: "bold",
-					color: "#621708",
-				}}
-			>
-				{goldDropped}
-			</p>
-
 			<Stack
 				direction='row'
 				spacing={6}

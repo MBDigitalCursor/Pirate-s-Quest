@@ -1,27 +1,32 @@
 import { Box } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "../GameWindow/gameWindow.css";
 import { useSelector } from "react-redux";
-import { setMousePos } from "../../store/appStore";
 import MainContext from "../../context/MainContext";
 import { handleDropThunk } from "../../utils/thunkCreators";
+import { Stack } from "@mui/system";
+import { setNewGoldDroppedArr } from "../../store/appStore";
 
 function GameWindow() {
 	const { dispatch } = useContext(MainContext);
 
-	const { logged } = useSelector((state) => state.appStore);
+	const { logged, goldDroppedArr } = useSelector((state) => state.appStore);
 
-	const handleClick = (e) => {
-		if (!e.target) dispatch(setMousePos({}));
-		const handleMouseMove = (event) => {
-			dispatch(setMousePos({ x: event.clientX, y: event.clientY }));
-		};
-		e.target.addEventListener("click", handleMouseMove);
-	};
+	useEffect(() => {
+		if (goldDroppedArr.length > 0) {
+			const intervalId = setInterval(() => {
+				const array = goldDroppedArr;
+				const arrayv2 = array.slice(1);
+				dispatch(setNewGoldDroppedArr(arrayv2));
+			}, 200);
+			return () => {
+				clearInterval(intervalId);
+			};
+		}
+	}, [goldDroppedArr]);
 
-	const handleDrop = (e) => {
+	const handleDrop = () => {
 		dispatch(handleDropThunk({ id: logged.id }));
-		handleClick(e);
 	};
 
 	return (
@@ -38,22 +43,49 @@ function GameWindow() {
 				backdropFilter: "blur(4px)",
 			}}
 		>
-			<p
-				style={{
+			<Box
+				sx={{
 					position: "absolute",
 					top: "2%",
 					right: "5%",
-					paddingTop: "0.3rem",
 				}}
 			>
-				{logged && logged.gold.toFixed(1)}
-				<b> 💰</b>
-			</p>
+				<p
+					style={{
+						paddingTop: "0.3rem",
+					}}
+				>
+					{logged && logged.gold.toFixed(1)}
+					<b> 💰</b>
+				</p>
+				<Box
+					// className="scale-out-top"
+					style={{
+						fontSize: "2rem",
+						zIndex: 10,
+						fontWeight: "bold",
+						color: "#621708",
+					}}
+				>
+					<Stack>
+						{goldDroppedArr.map((gold, i) => (
+							<span
+								className={i === 0 ? "text-blur-scale" : "text-blur"}
+								key={i}
+							>
+								{gold}
+							</span>
+						))}
+					</Stack>
+				</Box>
+			</Box>
 			<img
-				onClick={(e) => handleDrop(e)}
-				className='clickable-object'
-				src='https://cdn-icons-png.flaticon.com/512/2826/2826202.png'
-				alt=''
+				onClick={(e) => {
+					handleDrop(e);
+				}}
+				className="clickable-object"
+				src="https://cdn-icons-png.flaticon.com/512/2826/2826202.png"
+				alt=""
 			/>
 		</Box>
 	);

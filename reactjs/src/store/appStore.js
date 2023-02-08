@@ -6,7 +6,6 @@ export const appStore = createSlice(
 		name: "appStore",
 		initialState: {
 			logged: null,
-			mousePos: {},
 			loginError: "",
 			url: "http://localhost:5000",
 			newUser: false,
@@ -46,14 +45,11 @@ export const appStore = createSlice(
 					exp: 50000,
 				},
 			],
-			goldDropped: 0,
+			goldDroppedArr: [],
 		},
 		reducers: {
 			setLogged: (state, action) => {
 				state.logged = action.payload;
-			},
-			setMousePos: (state, action) => {
-				state.mousePos = action.payload;
 			},
 			setLoginError: (state, action) => {
 				state.loginError = action.payload;
@@ -86,14 +82,17 @@ export const appStore = createSlice(
 			setSortedUsersArray: (state, action) => {
 				state.sortedUsersArray = action.payload;
 			},
-			setGoldDropped: (state, action) => {
-				state.goldDropped = action.payload;
+			setGoldDroppedArr: (state, action) => {
+				state.goldDroppedArr = [...state.goldDroppedArr, action.payload];
+			},
+			setNewGoldDroppedArr: (state, action) => {
+				state.goldDroppedArr = action.payload;
 			},
 		},
 	},
 	applyMiddleware(thunk)
 );
 
-export const { setLogged, setMousePos, setLoginError, setNewUser, setProgress, setShowDrop, setShowUpgrades, setShowLeaderboardTrigger, setAllUsers, setSortedUsersArray, setGoldDropped } = appStore.actions;
+export const { setLogged, setLoginError, setNewUser, setProgress, setShowDrop, setShowUpgrades, setShowLeaderboardTrigger, setAllUsers, setSortedUsersArray, setGoldDroppedArr, setNewGoldDroppedArr } = appStore.actions;
 
 export default appStore.reducer;
