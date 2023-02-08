@@ -13,7 +13,7 @@ function LoginReg() {
 
 	useEffect(() => {
 		dispatch(setLoginError(""));
-	}, [newUser]);
+	});
 
 	return (
 		<Box
