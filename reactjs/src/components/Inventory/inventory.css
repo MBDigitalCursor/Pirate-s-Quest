@@ -1,0 +1,54 @@
+.close-inv-btn:hover {
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  transform: scale(1.08);
+}
+
+.close-inv-btn:active {
+  transition: 0.2s ease-in-out;
+  transform: scale(0.98);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.backpack {
+  overflow-x: hidden;
+}
+
+.item-common {
+  background-color: rgba(2, 185, 2, 0.5);
+  cursor: pointer;
+}
+
+.item-rare {
+  background-color: rgba(0, 0, 255, 0.55);
+  cursor: pointer;
+}
+
+.item-epic {
+  background-color: rgba(179, 4, 179, 0.5);
+  cursor: pointer;
+}
+
+.item {
+  background-color: rgba(153, 153, 153, 0.5);
+  cursor: pointer;
+}

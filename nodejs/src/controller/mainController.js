@@ -66,12 +66,23 @@ function updateRank(currentExp) {
 	return title;
 }
 
-const caclPercent = (user) => {
-	const rnd = Math.random() * 100;
-	const critChance = user.upgrades[1].step * user.upgrades[1].level;
-	const critMultiplier = 2 + user.upgrades[2].step * user.upgrades[2].level;
+const randomNumber = () => Math.random() * 100;
+
+const upgradeObj = (user, upgTitle) => {
+	const foundUpgrade = user.upgrades.find((upg) => upg.upgradeTitle === upgTitle);
+	return foundUpgrade;
+};
+
+const calcCritPercent = (user) => {
+	const critChanceUpgrade = upgradeObj(user, "critStrikeChanceLevel");
+	const critMultiplierUpgrade = upgradeObj(user, "critStrikeMultiplierLevel");
+	const goldDropUpgrade = upgradeObj(user, "dropPerClickLevel");
+
+	const rnd = randomNumber();
+	const critChance = critChanceUpgrade.step * critChanceUpgrade.level;
+	const critMultiplier = 2 + critMultiplierUpgrade.step * critMultiplierUpgrade.level;
 	if (critChance > rnd) {
-		const goldPerClick = 1 + user.upgrades[0].level * user.upgrades[0].step;
+		const goldPerClick = 1 + goldDropUpgrade.level * goldDropUpgrade.step;
 		const goldAmount = goldPerClick * critMultiplier;
 		return {
 			active: true,
@@ -127,17 +138,18 @@ module.exports = {
 		const { id } = req.body;
 		const foundUser = await UserSchema.findOne({ id });
 		const newRank = updateRank(foundUser.rank.exp);
-		if (foundUser) {
-			if (caclPercent(foundUser).active) {
-				const critMultiplier = 2 + foundUser.upgrades[2].step * foundUser.upgrades[2].level;
-				const goldPerClick = 1 + foundUser.upgrades[0].level * foundUser.upgrades[0].step;
+		const goldDropUpgrade = upgradeObj(foundUser, "dropPerClickLevel");
+		const critMultiplierUpgrade = upgradeObj(foundUser, "critStrikeMultiplierLevel");
+		const crit = calcCritPercent(foundUser);
 
+		if (foundUser) {
+			if (crit.active) {
 				await UserSchema.findOneAndUpdate(
 					{ id },
 					{
 						$inc: {
-							gold: goldPerClick * critMultiplier,
-							"rank.exp": 2 + foundUser.upgrades[2].step * foundUser.upgrades[2].level,
+							gold: crit.goldAmount,
+							"rank.exp": 2 + critMultiplierUpgrade.step * critMultiplierUpgrade.level,
 						},
 						$set: {
 							"rank.rank": newRank,
@@ -150,7 +162,7 @@ module.exports = {
 					message: "Gold added, CRIT",
 					data: {
 						user: updatedUser,
-						goldReceived: goldPerClick * critMultiplier,
+						goldReceived: crit.goldAmount,
 					},
 				});
 			} else {
@@ -158,7 +170,7 @@ module.exports = {
 					{ id },
 					{
 						$inc: {
-							gold: 1 + foundUser.upgrades[0].level / 10,
+							gold: 1 + goldDropUpgrade.level / 10,
 							"rank.exp": 1,
 						},
 						$set: {
@@ -172,7 +184,7 @@ module.exports = {
 					message: "Gold added",
 					data: {
 						user: updatedUser,
-						goldReceived: 1 + foundUser.upgrades[0].level / 10,
+						goldReceived: 1 + goldDropUpgrade.level / 10,
 					},
 				});
 			}

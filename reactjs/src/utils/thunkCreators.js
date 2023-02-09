@@ -1,16 +1,31 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { setAllUsers, setGoldDropped, setGoldDroppedArr, setLogged, setProgress } from "../store/appStore";
+import { setAllUsers, setGoldDropped, setGoldDroppedArr, setLogged, setProgress, updateInventory } from "../store/appStore";
 
 const url = "http://localhost:5000";
 
-export const handleDropThunk = (id) => (dispatch) => {
-	axios.post(`${url}/calcGold`, id).then((res) => {
-		const data = res.data.data;
-		dispatch(setLogged(data.user));
-		dispatch(setProgress());
-		dispatch(setGoldDroppedArr(data.goldReceived));
-	});
+export const handleGoldDropThunk = (id) => (dispatch) => {
+	axios
+		.post(`${url}/calcGold`, id)
+		.then((res) => {
+			const data = res.data.data;
+			dispatch(setLogged(data.user));
+			dispatch(setProgress());
+			dispatch(setGoldDroppedArr(data.goldReceived.toFixed(1)));
+		})
+		.catch((err) => console.log(err));
+};
+
+export const handleChestDropThunk = (id) => (dispatch) => {
+	axios
+		.post(`${url}/calcDrop`, id)
+		.then((res) => {
+			const loot = res.data.loot;
+			if (loot !== null) {
+				dispatch(updateInventory(loot));
+			}
+		})
+		.catch((err) => console.log(err));
 };
 
 export const userLoggedThunk = (id) => (dispatch) => {

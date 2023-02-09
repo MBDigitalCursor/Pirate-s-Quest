@@ -42,12 +42,12 @@ function App() {
 	};
 
 	return (
-		<div className="App">
+		<div className='App'>
 			<MainContext.Provider value={states}>
 				<ToastContainer
-					progressClassName="toast-progress"
-					className="toast"
-					position="bottom-right"
+					progressClassName='toast-progress'
+					className='toast'
+					position='bottom-right'
 					autoClose={1000}
 					hideProgressBar={false}
 					newestOnTop={false}
@@ -56,17 +56,17 @@ function App() {
 					pauseOnFocusLoss
 					draggable
 					pauseOnHover
-					theme="light"
+					theme='light'
 				/>
 				<ThemeProvider theme={theme}>
 					<BrowserRouter>
 						<Routes>
 							<Route
-								path="/"
+								path='/'
 								element={<LoginRegPage />}
 							/>
 							<Route
-								path="/main"
+								path='/main'
 								element={<Main></Main>}
 							></Route>
 						</Routes>

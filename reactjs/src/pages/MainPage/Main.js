@@ -2,18 +2,16 @@ import { Stack } from "@mui/system";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import GameWindow from "../../components/GameWindow/GameWindow";
+import Inventory from "../../components/Inventory/Inventory";
 import Leadersboard from "../../components/LeadersBoard/Leadersboard";
+import Navigation from "../../components/Navigation/Navigation";
 import Profile from "../../components/ProfileComp/Profile";
 import RankComp from "../../components/RankComp/RankComp";
 import UpgradesWindow from "../../components/UpgradesComp/UpgradesWindow";
 import "../MainPage/mainPage.css";
 
 function Main() {
-	const { mousePos, showDrop, showUpgrades, goldDropped } = useSelector((state) => state.appStore);
-
-	useEffect(() => {
-		console.log(goldDropped);
-	}, []);
+	const { showUpgrades } = useSelector((state) => state.appStore);
 
 	return (
 		<div
@@ -33,8 +31,10 @@ function Main() {
 				<GameWindow />
 				<Leadersboard />
 			</Stack>
+			<Navigation />
 			<RankComp />
 			<Profile />
+			<Inventory></Inventory>
 		</div>
 	);
 }

@@ -3,11 +3,11 @@ import React, { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import MainContext from "../../context/MainContext";
-import { setLogged, setShowLeaderboardTrigger, setShowUpgrades } from "../../store/appStore";
+import { setInventoryOpen, setLogged, setShowLeaderboardTrigger, setShowUpgrades } from "../../store/appStore";
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
-	const { logged, showUpgrades } = useSelector((state) => state.appStore);
+	const { logged, showUpgrades, inventoryOpen } = useSelector((state) => state.appStore);
 
 	const nav = useNavigate();
 
@@ -34,26 +34,26 @@ function Profile() {
 				<Box
 					sx={{
 						position: "absolute",
-						height: "5rem",
-						width: "20rem",
+						height: "5.5rem",
+						width: "19rem",
 						padding: "0.5rem",
 						boxSizing: "border-box",
 						boxShadow: "3px 3px 10px 1px #3b3939ad",
 						borderRadius: "4px",
-						top: "4rem",
-						right: "5.4rem",
+						top: "1%",
+						right: "1%",
 						display: "flex",
 						justifyContent: "flex-start",
-						gap: "1rem",
 						backdropFilter: "blur(4px)",
 					}}
 				>
 					<img
 						style={{
-							borderRadius: "50%",
+							borderRadius: "10px",
+							height: "auto",
 						}}
-						src={logged.profileImage ? logged.profileImage : "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"}
-						alt='default avatar'
+						src={logged && logged.profileImage}
+						alt='avatar'
 					/>
 					<Box
 						sx={{
@@ -61,17 +61,41 @@ function Profile() {
 							display: "flex",
 							flexDirection: "column",
 							justifyContent: "space-between",
+							alignItems: "flex-start",
 						}}
 					>
-						<Typography
-							variant='h6'
-							component='h6'
-							sx={{
-								paddingRight: "1rem",
+						<div
+							style={{
+								display: "flex",
+								alignItems: "flex-start",
+								justifyContent: "space-evenly",
+								width: "100%",
 							}}
 						>
-							{logged.nick}
-						</Typography>
+							<Typography
+								variant='h6'
+								component='h6'
+								sx={{
+									paddingRight: "1rem",
+									marginLeft: "1rem",
+									fontSize: "1.2rem",
+									fontWeight: "bold",
+									letterSpacing: "1px",
+									color: "#621708",
+								}}
+							>
+								{logged.nick}
+							</Typography>
+							<p
+								style={{
+									fontSize: "1.2rem",
+									fontWeight: "bold",
+								}}
+							>
+								{logged && logged.gold.toFixed(1)}
+								<b> 💰</b>
+							</p>
+						</div>
 						<Box
 							sx={{
 								width: "100%",
@@ -85,7 +109,7 @@ function Profile() {
 									color='gold'
 									variant='contained'
 									sx={{
-										height: "80%",
+										height: "70%",
 										marginRight: "1rem",
 									}}
 									aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -102,12 +126,12 @@ function Profile() {
 									open={open}
 									onClose={handleClose}
 									anchorOrigin={{
-										vertical: "top",
-										horizontal: "left",
+										vertical: "bottom",
+										horizontal: "right",
 									}}
 									transformOrigin={{
 										vertical: "top",
-										horizontal: "left",
+										horizontal: "right",
 									}}
 								>
 									<MenuItem
@@ -126,7 +150,14 @@ function Profile() {
 									>
 										Leaderboard
 									</MenuItem>
-									<MenuItem onClick={handleClose}>Inventory</MenuItem>
+									<MenuItem
+										onClick={() => {
+											handleClose();
+											dispatch(setInventoryOpen(!inventoryOpen));
+										}}
+									>
+										Inventory
+									</MenuItem>
 								</Menu>
 							</div>
 							<Button
