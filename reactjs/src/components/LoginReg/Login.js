@@ -27,8 +27,8 @@ function Login() {
 
 		axios.post("http://localhost:5000/login", loginObj).then((response) => {
 			if (response.data.error) {
-				console.log(response.data.message);
-				dispatch(setLoginError(response.data.message));
+				toast(response.data.message);
+				// dispatch(setLoginError(response.data.message));
 				return;
 			} else {
 				toast(response.data.message);

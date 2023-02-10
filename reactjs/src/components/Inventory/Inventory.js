@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setInventoryOpen, setSortedInv } from "../../store/appStore";
 import { AiOutlineClose } from "react-icons/ai";
 import "../Inventory/inventory.css";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import Item from "./Item";
 
 function Inventory() {
@@ -39,7 +38,7 @@ function Inventory() {
 				}
 				return 0;
 			});
-			console.log("inventory ===", inventory);
+
 			return dispatch(setSortedInv(inventory));
 		}
 		if (sortBy === "category") {
@@ -143,7 +142,8 @@ function Inventory() {
 								flexWrap='wrap'
 							>
 								{sortedInventory === null
-									? logged.inventory.map((item, i) => (
+									? logged &&
+									  logged.inventory.map((item, i) => (
 											<Item
 												key={i}
 												index={i}

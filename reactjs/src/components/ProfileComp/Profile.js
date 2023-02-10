@@ -7,11 +7,11 @@ import { setInventoryOpen, setLogged, setShowLeaderboardTrigger, setShowUpgrades
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
-	const { logged, showUpgrades, inventoryOpen } = useSelector((state) => state.appStore);
+	const { logged, inventoryOpen } = useSelector((state) => state.appStore);
 
 	const nav = useNavigate();
 
-	const { dispatch, socket } = useContext(MainContext);
+	const { dispatch } = useContext(MainContext);
 
 	const logOut = () => {
 		dispatch(setLogged(null));

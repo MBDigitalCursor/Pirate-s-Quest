@@ -1,0 +1,59 @@
+.logs {
+  position: absolute;
+  bottom: -185px;
+  left: 1%;
+  background-color: #424242ad;
+  border: 1px solid black;
+  border-radius: 5px;
+
+}
+
+.closed-logs {
+  transition: 0.3s ease-in-out;
+  width: 3rem;
+  padding: 0.1rem 0.2rem;
+}
+
+.opened-logs {
+  transition: 0.3s ease-in-out;
+  width: 30rem;
+  height: 10rem;
+  padding: 0.1rem 0.2rem;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.logs-btn {
+  border-radius: 5px;
+  position: fixed;
+  bottom: -180px;
+  left: 20px;
+}
+
+.logs-btn:hover {
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  transform: scale(1.04);
+}
+
+.logs-btn:active {
+  background-color: #383838d5;
+  transform: scale(0.99);
+}
+
+.logs-messages {
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 10rem;
+}
+
+.logs-messages p {
+  font-size: 0.9rem;
+
+}
+
+.closed-logs:hover {}
+
+.closed-logs:active {}

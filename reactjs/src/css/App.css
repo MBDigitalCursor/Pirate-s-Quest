@@ -8,6 +8,28 @@
 }
 
 
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 15px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 
 .toast-progress {
   background-color: #fff;

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import GameWindow from "../../components/GameWindow/GameWindow";
 import Inventory from "../../components/Inventory/Inventory";
 import Leadersboard from "../../components/LeadersBoard/Leadersboard";
+import Log from "../../components/LogComp/Log";
 import Navigation from "../../components/Navigation/Navigation";
 import Profile from "../../components/ProfileComp/Profile";
 import RankComp from "../../components/RankComp/RankComp";
@@ -34,7 +35,8 @@ function Main() {
 			<Navigation />
 			<RankComp />
 			<Profile />
-			<Inventory></Inventory>
+			<Inventory />
+			<Log />
 		</div>
 	);
 }
