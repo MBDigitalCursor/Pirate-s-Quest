@@ -11,11 +11,11 @@ export const handleGoldDropThunk = (id) => (dispatch) => {
 	axios
 		.post(`${url}/calcGold`, id)
 		.then((res) => {
-			const data = res.data.data;
-			const goldDrop = data.goldReceived.toFixed(1);
-			dispatch(setLogged(data.user));
+			const user = res.data.data;
+			const message = res.data.message;
+			dispatch(setLogged(user));
 			dispatch(setProgress());
-			dispatch(setLogs(`${formatedDate} : You got ${goldDrop} gold`));
+			dispatch(setLogs(`${formatedDate} : ${message}`));
 		})
 		.catch((err) => console.log(err));
 };
@@ -78,6 +78,21 @@ export const openChestThunk = (id, chest) => (dispatch) => {
 		chest,
 	};
 	axios.post(`${url}/chestOpen`, data).then((res) => {
+		const message = res.data.message;
+		const user = res.data.data;
+		dispatch(setLogs(`${formatedDate} : ${message}`));
+		dispatch(setLogged(user));
+	});
+};
+
+export const openAllChestsWithSameRarity = (id, chestRarity) => (dispatch) => {
+	const timeNow = new Date().getTime();
+	const formatedDate = format(timeNow, "HH:mm:ss");
+	const data = {
+		id,
+		chestRarity,
+	};
+	axios.post(`${url}/openAllChests`, data).then((res) => {
 		const message = res.data.message;
 		const user = res.data.data;
 		dispatch(setLogs(`${formatedDate} : ${message}`));

@@ -171,6 +171,26 @@ const calcGoldAndExpFromChest = (minG, maxG, minE, maxE) => {
 	};
 };
 
+const openChests = (rarity, howMuchChests) => {
+	let goldAndExpArr = [];
+	if (rarity === "common") {
+		for (let i = 0; i <= howMuchChests; i++) {
+			goldAndExpArr.push(calcGoldAndExpFromChest(10, 50, 5, 20));
+		}
+	}
+	if (rarity === "rare") {
+		for (let i = 0; i <= howMuchChests; i++) {
+			goldAndExpArr.push(calcGoldAndExpFromChest(50, 150, 15, 40));
+		}
+	}
+	if (rarity === "epic") {
+		for (let i = 0; i <= howMuchChests; i++) {
+			goldAndExpArr.push(calcGoldAndExpFromChest(150, 300, 30, 70));
+		}
+	}
+	return goldAndExpArr;
+};
+
 module.exports = {
 	dropChances: async (req, res) => {
 		const { id } = req.body;
@@ -278,5 +298,33 @@ module.exports = {
 			const updatedUser = await UserSchema.findOne({ id });
 			return res.send({ error: false, message: `${goldFromChest} gold and ${expFromChest} exp received from epic Chest`, data: updatedUser });
 		}
+	},
+	openAllChestsWithSameRarity: async (req, res) => {
+		const { id, chestRarity } = req.body;
+		const user = await UserSchema.findOne({ id });
+		const chests = user.inventory.filter((item) => item.title === "Chest" && item.rarity === chestRarity);
+		const newInv = user.inventory.filter((item) => item.title === "Chest" && item.rarity !== chestRarity);
+		const goldAndExpArr = openChests(chestRarity, chests.length);
+		const goldSumFromOpenedChests = goldAndExpArr.reduce((acc, current) => {
+			return acc + current.goldFromChest;
+		}, 0);
+		const expSumFromOpenedChests = goldAndExpArr.reduce((acc, current) => {
+			return acc + current.expFromChest;
+		}, 0);
+
+		await UserSchema.findOneAndUpdate(
+			{ id },
+			{
+				$set: {
+					inventory: newInv,
+				},
+				$inc: {
+					gold: goldSumFromOpenedChests,
+					"rank.exp": expSumFromOpenedChests,
+				},
+			}
+		);
+		const updatedUser = await UserSchema.findOne({ id });
+		return res.send({ error: false, message: `${goldSumFromOpenedChests} gold and ${expSumFromOpenedChests} exp received from ${chests.length} ${chestRarity} Chests`, data: updatedUser });
 	},
 };

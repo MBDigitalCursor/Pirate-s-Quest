@@ -159,18 +159,16 @@ module.exports = {
 				const updatedUser = await UserSchema.findOne({ id });
 				return res.send({
 					error: false,
-					message: "Gold added, CRIT",
-					data: {
-						user: updatedUser,
-						goldReceived: crit.goldAmount,
-					},
+					message: `Critical strike! You got ${crit.goldAmount.toFixed(1)} gold`,
+					data: updatedUser,
 				});
 			} else {
+				const goldDropped = 1 + goldDropUpgrade.level / 10;
 				await UserSchema.findOneAndUpdate(
 					{ id },
 					{
 						$inc: {
-							gold: 1 + goldDropUpgrade.level / 10,
+							gold: goldDropped,
 							"rank.exp": 1,
 						},
 						$set: {
@@ -181,11 +179,8 @@ module.exports = {
 				const updatedUser = await UserSchema.findOne({ id });
 				return res.send({
 					error: false,
-					message: "Gold added",
-					data: {
-						user: updatedUser,
-						goldReceived: 1 + goldDropUpgrade.level / 10,
-					},
+					message: `You got ${goldDropped.toFixed(1)} gold`,
+					data: updatedUser,
 				});
 			}
 		}

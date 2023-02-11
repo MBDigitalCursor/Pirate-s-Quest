@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./inventory.css";
 import itemsData from "../../helpers/items.json";
 import { useDispatch, useSelector } from "react-redux";
-import { openChestThunk } from "../../utils/thunkCreators";
+import { openAllChestsWithSameRarity, openChestThunk } from "../../utils/thunkCreators";
 import { Box } from "@mui/system";
 import { Menu, MenuItem } from "@mui/material";
 
@@ -109,10 +109,10 @@ function Item({ item, index }) {
 				<MenuItem
 					onClick={() => {
 						handleClose();
-						console.log(item);
+						dispatch(openAllChestsWithSameRarity(logged.id, item.rarity));
 					}}
 				>
-					Discard
+					Open All
 				</MenuItem>
 			</Menu>
 		</Box>

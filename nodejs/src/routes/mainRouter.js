@@ -1,5 +1,5 @@
 const express = require("express");
-const { dropChances, chestOpen } = require("../controller/dropController");
+const { dropChances, chestOpen, openAllChestsWithSameRarity } = require("../controller/dropController");
 const { register, login, allUsers, addGold, upgrade, userLogged } = require("../controller/mainController");
 
 const mainRouter = express.Router();
@@ -12,5 +12,6 @@ mainRouter.post("/upgrade", upgrade);
 mainRouter.post("/userLogged", userLogged);
 mainRouter.post("/calcDrop", dropChances);
 mainRouter.post("/chestOpen", chestOpen);
+mainRouter.post("/openAllChests", openAllChestsWithSameRarity);
 
 module.exports = mainRouter;

@@ -26,7 +26,24 @@ function Log() {
 					<KeyboardArrowDownIcon className='logs-btn' />
 				</Box>
 			)}
-			{!showLogs ? "" : <Box className='logs-messages'>{logs && logs.map((log, i) => <p key={i}>{log}</p>)}</Box>}
+			{!showLogs ? (
+				""
+			) : (
+				<Box className='logs-messages'>
+					{logs &&
+						logs.map((log, i) => (
+							<p
+								key={i}
+								style={{
+									color: log.includes("common") ? "#02b90280" : log.includes("rare") ? "#0000ff8c" : log.includes("epic") ? "#b304b380" : log.includes("Critical") ? "red" : "white",
+									fontWeight: log.includes("common") ? "bold" : log.includes("rare") ? "bold" : log.includes("epic") ? "bold" : "normal",
+								}}
+							>
+								{log}
+							</p>
+						))}
+				</Box>
+			)}
 		</Box>
 	);
 }
