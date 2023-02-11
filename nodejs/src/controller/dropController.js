@@ -1,6 +1,14 @@
 const UserSchema = require("../schemas/UserSchema");
 const uid = require("uid-safe");
 
+const generateId = async (item) => {
+	const uniqueId = await uid(10);
+	return {
+		itemId: uniqueId,
+		...item,
+	};
+};
+
 const upgradeObj = (user, upgTitle) => {
 	const foundUpgrade = user.upgrades.find((upg) => upg.upgradeTitle === upgTitle);
 	return foundUpgrade;
@@ -28,7 +36,7 @@ const calcTripleDropPercent = (user) => {
 	}
 };
 
-const calcCommonDropPercent = (user) => {
+const calcCommonDropPercent = async (user) => {
 	const upgrade = upgradeObj(user, "commonDropChanceLevel");
 	const commonDropRND = Math.random() * 100;
 	const commonDropRate = upgrade.step * upgrade.level;
@@ -39,22 +47,30 @@ const calcCommonDropPercent = (user) => {
 		title: "Chest",
 	};
 
-	if (40 > commonDropRND) {
-		if (tripleDrop)
+	if (commonDropRate > commonDropRND) {
+		if (tripleDrop) {
+			const drop = [await generateId(loot), await generateId(loot), await generateId(loot)];
 			return {
 				active: true,
-				drop: [loot, loot, loot],
+				drop,
 			};
-		if (doubleDrop)
+		}
+
+		if (doubleDrop) {
+			const drop = [await generateId(loot), await generateId(loot)];
 			return {
 				active: true,
-				drop: [loot, loot],
+				drop,
 			};
-		if (!tripleDrop && !doubleDrop)
+		}
+
+		if (!tripleDrop && !doubleDrop) {
+			const drop = [await generateId(loot)];
 			return {
 				active: true,
-				drop: [loot],
+				drop,
 			};
+		}
 	} else {
 		return {
 			active: false,
@@ -62,7 +78,7 @@ const calcCommonDropPercent = (user) => {
 	}
 };
 
-const calcRareDropPercent = (user) => {
+const calcRareDropPercent = async (user) => {
 	const upgrade = upgradeObj(user, "rareDropChanceLevel");
 
 	const tripleDrop = calcTripleDropPercent(user);
@@ -74,21 +90,29 @@ const calcRareDropPercent = (user) => {
 		title: "Chest",
 	};
 	if (rareDropRate > rareDropRND) {
-		if (tripleDrop)
+		if (tripleDrop) {
+			const drop = [await generateId(loot), await generateId(loot), await generateId(loot)];
 			return {
 				active: true,
-				drop: [loot, loot, loot],
+				drop,
 			};
-		if (doubleDrop)
+		}
+
+		if (doubleDrop) {
+			const drop = [await generateId(loot), await generateId(loot)];
 			return {
 				active: true,
-				drop: [loot, loot],
+				drop,
 			};
-		if (!tripleDrop && !doubleDrop)
+		}
+
+		if (!tripleDrop && !doubleDrop) {
+			const drop = [await generateId(loot)];
 			return {
 				active: true,
-				drop: [loot],
+				drop,
 			};
+		}
 	} else {
 		return {
 			active: false,
@@ -96,7 +120,7 @@ const calcRareDropPercent = (user) => {
 	}
 };
 
-const calcEpicDropPercent = (user) => {
+const calcEpicDropPercent = async (user) => {
 	const upgrade = upgradeObj(user, "epicDropChanceLevel");
 
 	const tripleDrop = calcTripleDropPercent(user);
@@ -108,21 +132,29 @@ const calcEpicDropPercent = (user) => {
 		title: "Chest",
 	};
 	if (epicDropRate > epicDropRND) {
-		if (tripleDrop)
+		if (tripleDrop) {
+			const drop = [await generateId(loot), await generateId(loot), await generateId(loot)];
 			return {
 				active: true,
-				drop: [loot, loot, loot],
+				drop,
 			};
-		if (doubleDrop)
+		}
+
+		if (doubleDrop) {
+			const drop = [await generateId(loot), await generateId(loot)];
 			return {
 				active: true,
-				drop: [loot, loot],
+				drop,
 			};
-		if (!tripleDrop && !doubleDrop)
+		}
+
+		if (!tripleDrop && !doubleDrop) {
+			const drop = [await generateId(loot)];
 			return {
 				active: true,
-				drop: [loot],
+				drop,
 			};
+		}
 	} else {
 		return {
 			active: false,
@@ -141,13 +173,11 @@ const calcGoldAndExpFromChest = (minG, maxG, minE, maxE) => {
 
 module.exports = {
 	dropChances: async (req, res) => {
-		// TODO Pridet ID prie kiekvieno itemo
 		const { id } = req.body;
 		const foundUser = await UserSchema.findOne({ id });
-		const commonDrop = calcCommonDropPercent(foundUser);
-		const rareDrop = calcRareDropPercent(foundUser);
-		const epicDrop = calcEpicDropPercent(foundUser);
-
+		const commonDrop = await calcCommonDropPercent(foundUser);
+		const rareDrop = await calcRareDropPercent(foundUser);
+		const epicDrop = await calcEpicDropPercent(foundUser);
 		if (epicDrop.active) {
 			await UserSchema.findOneAndUpdate(
 				{ id },
@@ -192,13 +222,11 @@ module.exports = {
 	},
 	chestOpen: async (req, res) => {
 		const { id, chest } = req.body;
-		console.log("chest ===", chest);
 		const user = await UserSchema.findOne({ id });
 		if (chest.rarity === "common") {
 			const { goldFromChest, expFromChest } = calcGoldAndExpFromChest(10, 50, 5, 20);
-			const chestIndex = user.inventory.findIndex((item) => item.title === chest.title && item.rarity === chest.rarity);
-			// TODO Pabaigt logika
-			console.log("chestIndex ===", chestIndex);
+			const updatedInv = user.inventory.filter((item) => item.itemId !== chest.itemId);
+
 			await UserSchema.findOneAndUpdate(
 				{ id },
 				{
@@ -206,21 +234,17 @@ module.exports = {
 						gold: goldFromChest,
 						"rank.exp": expFromChest,
 					},
-					// $pull: {
-					// 	inventory: { rarity: chest.rarity, title: chest.title },
-					// },
+					$set: {
+						inventory: updatedInv,
+					},
 				}
 			);
 			const updatedUser = await UserSchema.findOne({ id });
-			return res.send({ error: false, message: `${goldFromChest} gold and ${expFromChest} exp received`, data: updatedUser });
+			return res.send({ error: false, message: `${goldFromChest} gold and ${expFromChest} exp received from common Chest`, data: updatedUser });
 		}
 		if (chest.rarity === "rare") {
 			const { goldFromChest, expFromChest } = calcGoldAndExpFromChest(50, 150, 15, 40);
-			const chestIndex = user.inventory.findIndex((item) => item.title === chest.title && item.rarity === chest.rarity);
-			console.log("chestIndex ===", chestIndex);
-			console.log("Old Inv ===", user.inventory);
-			const newInv = user.inventory.splice(chestIndex, 1);
-			console.log("new Inv ===", newInv);
+			const updatedInv = user.inventory.filter((item) => item.itemId !== chest.itemId);
 			await UserSchema.findOneAndUpdate(
 				{ id },
 				{
@@ -228,17 +252,31 @@ module.exports = {
 						gold: goldFromChest,
 						"rank.exp": expFromChest,
 					},
-					// $pull: {
-					// 	inventory: { rarity: chest.rarity, title: chest.title },
-					// },
+					$set: {
+						inventory: updatedInv,
+					},
 				}
 			);
 			const updatedUser = await UserSchema.findOne({ id });
-			return res.send({ error: false, message: `Rare chest opened, ${goldFromChest} gold and ${expFromChest} exp received` });
+			return res.send({ error: false, message: `${goldFromChest} gold and ${expFromChest} exp received from rare Chest`, data: updatedUser });
 		}
 		if (chest.rarity === "epic") {
 			const { goldFromChest, expFromChest } = calcGoldAndExpFromChest(150, 300, 30, 70);
-			return res.send({ error: false, message: `Epic chest opened, ${goldFromChest} gold and ${expFromChest} exp received` });
+			const updatedInv = user.inventory.filter((item) => item.itemId !== chest.itemId);
+			await UserSchema.findOneAndUpdate(
+				{ id },
+				{
+					$inc: {
+						gold: goldFromChest,
+						"rank.exp": expFromChest,
+					},
+					$set: {
+						inventory: updatedInv,
+					},
+				}
+			);
+			const updatedUser = await UserSchema.findOne({ id });
+			return res.send({ error: false, message: `${goldFromChest} gold and ${expFromChest} exp received from epic Chest`, data: updatedUser });
 		}
 	},
 };

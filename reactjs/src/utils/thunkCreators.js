@@ -7,7 +7,7 @@ const url = "http://localhost:5000";
 
 export const handleGoldDropThunk = (id) => (dispatch) => {
 	const timeNow = new Date().getTime();
-	const formatedDate = format(timeNow, "yyyy/MM/d HH:mm:ss");
+	const formatedDate = format(timeNow, "HH:mm:ss");
 	axios
 		.post(`${url}/calcGold`, id)
 		.then((res) => {
@@ -15,21 +15,21 @@ export const handleGoldDropThunk = (id) => (dispatch) => {
 			const goldDrop = data.goldReceived.toFixed(1);
 			dispatch(setLogged(data.user));
 			dispatch(setProgress());
-			dispatch(setLogs(`${formatedDate} => You got ${goldDrop} gold`));
+			dispatch(setLogs(`${formatedDate} : You got ${goldDrop} gold`));
 		})
 		.catch((err) => console.log(err));
 };
 
 export const handleChestDropThunk = (id) => (dispatch) => {
 	const timeNow = new Date().getTime();
-	const formatedDate = format(timeNow, "yyyy/MM/d HH:mm:ss");
+	const formatedDate = format(timeNow, "HH:mm:ss");
 	axios
 		.post(`${url}/calcDrop`, id)
 		.then((res) => {
 			const loot = res.data.loot;
 			if (loot !== null) {
 				dispatch(updateInventory(loot));
-				dispatch(setLogs(`${formatedDate} => You got ${loot[0].rarity} ${loot[0].title} x${loot.length} , gratz`));
+				dispatch(setLogs(`${formatedDate} : You got ${loot[0].rarity} ${loot[0].title} x${loot.length} , gratz`));
 			}
 		})
 		.catch((err) => console.log(err));
@@ -72,15 +72,15 @@ export const handleUpgradeThunk = (data) => (dispatch) => {
 
 export const openChestThunk = (id, chest) => (dispatch) => {
 	const timeNow = new Date().getTime();
-	const formatedDate = format(timeNow, "yyyy/MM/d HH:mm:ss");
+	const formatedDate = format(timeNow, "HH:mm:ss");
 	const data = {
 		id,
 		chest,
 	};
-	// TODO
 	axios.post(`${url}/chestOpen`, data).then((res) => {
 		const message = res.data.message;
-		// const user = res.data.data;
-		dispatch(setLogs(`${formatedDate} => ${message}`));
+		const user = res.data.data;
+		dispatch(setLogs(`${formatedDate} : ${message}`));
+		dispatch(setLogged(user));
 	});
 };
