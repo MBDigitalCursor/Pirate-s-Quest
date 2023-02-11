@@ -106,11 +106,14 @@ export const appStore = createSlice(
 			setLogs: (state, action) => {
 				state.logs = [action.payload, ...state.logs];
 			},
+			resetLogs: (state, action) => {
+				state.logs = [];
+			},
 		},
 	},
 	applyMiddleware(thunk)
 );
 
-export const { setLogged, setLoginError, setNewUser, setProgress, setShowDrop, setShowUpgrades, setShowLeaderboardTrigger, setAllUsers, setSortedUsersArray, setGoldDroppedArr, setNewGoldDroppedArr, updateInventory, setInventoryOpen, setSortedInv, setShowLogs, setLogs } = appStore.actions;
+export const { setLogged, setLoginError, setNewUser, setProgress, setShowDrop, setShowUpgrades, setShowLeaderboardTrigger, setAllUsers, setSortedUsersArray, setGoldDroppedArr, setNewGoldDroppedArr, updateInventory, setInventoryOpen, setSortedInv, setShowLogs, setLogs, resetLogs } = appStore.actions;
 
 export default appStore.reducer;

@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import MainContext from "../../context/MainContext";
-import { setInventoryOpen, setLogged, setShowLeaderboardTrigger, setShowUpgrades } from "../../store/appStore";
+import { resetLogs, setInventoryOpen, setLogged, setShowLeaderboardTrigger, setShowUpgrades } from "../../store/appStore";
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
@@ -15,6 +15,7 @@ function Profile() {
 
 	const logOut = () => {
 		dispatch(setLogged(null));
+		dispatch(resetLogs());
 		nav("/");
 		localStorage.removeItem("user_id");
 	};
