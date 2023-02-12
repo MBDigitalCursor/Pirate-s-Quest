@@ -303,6 +303,7 @@ module.exports = {
 		const { id, chestRarity } = req.body;
 		const user = await UserSchema.findOne({ id });
 		const chests = user.inventory.filter((item) => item.title === "Chest" && item.rarity === chestRarity);
+		if (chests.length === 0) return;
 		const newInv = user.inventory.filter((item) => item.title === "Chest" && item.rarity !== chestRarity);
 		const goldAndExpArr = openChests(chestRarity, chests.length);
 		const goldSumFromOpenedChests = goldAndExpArr.reduce((acc, current) => {
