@@ -8,7 +8,6 @@ Join the pirate's life and follow the quest for ultimate wealth and glory in Pir
 
 ## Authors
 
-[@viktoraskris](https://github.com/viktoraskris)
 [@tonispagonis](https://github.com/tonispagonis?tab=repositories)
 [@Mixmln](https://github.com/Mixmln)
 [@ivenckunas](https://github.com/ivenckunas)
